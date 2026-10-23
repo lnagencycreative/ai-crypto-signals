@@ -31,9 +31,9 @@ Reasons: BTC = market benchmark; ETH = testnet this week
 `status` is `ok`, `skipped`, or `error`. A skipped file needs `skip_reason`
 and produces no coin mentions.
 
-`transcript_fidelity` records what the body actually is. Day 1 of this study
-is `abbreviated_session_notes`: the ranks and the reasons that were written
-down, not a verbatim transcript.
+`transcript_fidelity` records what the body actually is. `verbatim` is the
+full answer text. `abbreviated_session_notes` is ranks and reasons written
+down, not a full transcript. `not_collected` is a skip with no answer.
 
 ## JSON
 

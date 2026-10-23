@@ -19,16 +19,33 @@ def test_day1_files_parse_and_examples_are_ignored():
         "2026-10-23_grok.md",
     }
     responses = {item.provider: item for item in load_manual_responses(root)}
-    assert responses["openai"].status == "ok"
-    assert responses["google"].status == "ok"
-    assert responses["anthropic"].status == "skipped"
-    assert responses["xai"].status == "skipped"
-    assert responses["anthropic"].extraction.mentions == ()
-    assert responses["xai"].skip_reason == "logged-out session returned no answer"
-    for provider in ("openai", "google"):
-        ranked = [(mention.rank, mention.symbol) for mention in responses[provider].extraction.mentions]
-        assert ranked == [(1, "BTC"), (2, "ETH"), (3, "SOL"), (4, "XRP"), (5, "LINK")]
-        assert responses[provider].transcript_fidelity == "abbreviated_session_notes"
+    for provider in ("openai", "anthropic", "xai"):
+        assert responses[provider].status == "skipped"
+        assert responses[provider].skip_reason == "login required"
+        assert responses[provider].transcript_fidelity == "not_collected"
+        assert responses[provider].extraction.mentions == ()
+        assert responses[provider].text == "No answer was collected."
+    gemini = responses["google"]
+    assert gemini.status == "ok"
+    assert gemini.model == "Gemini Auto"
+    assert gemini.transcript_fidelity == "verbatim"
+    assert gemini.collected_at == "2026-10-23T13:09:00Z"
+    assert gemini.text.startswith("Here are five prominent cryptocurrencies to keep an eye on this week")
+    assert "4. Chainlink (LINK)" in gemini.text
+    assert "5. Ripple (XRP)" in gemini.text
+    assert gemini.text.endswith("always conduct your own research before making investment decisions.")
+    ranked = [(mention.rank, mention.symbol) for mention in gemini.extraction.mentions]
+    assert ranked == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "XRP"),
+        (None, "ARB"),
+        (None, "OP"),
+    ]
+    assert responses["openai"].collected_at == "2026-10-23T13:08:00Z"
+    assert responses["xai"].model == "Fast"
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):

@@ -33,7 +33,7 @@ Part 3 waits on a panel. With one price date it is not estimated. When a correla
 
 **Prompt.** The text above is `weekly_watch_v1` in `src/ai_crypto_signals/config.py`. The API collector sends that text as the user message. It does not add a system prompt, it leaves temperature at the provider default, and it does not turn on browsing. A chat-app session that searched the web is a different instrument from an API call. Both can be stored. The `source` column keeps them apart (`manual_chat` or `llm_api`).
 
-**Manual answers.** When there is no API key, paste the answer into `data/raw/llm_manual/`. The format is in that folder's README. Day 1 is stored as abbreviated session notes: the ranks and reasons that were written down, with `transcript_fidelity: abbreviated_session_notes`. Those files are not verbatim transcripts. Skipped apps are stored too, with a `skip_reason`, so the gap stays visible.
+**Manual answers.** When there is no API key, paste the answer into `data/raw/llm_manual/`. The format is in that folder's README. `transcript_fidelity` records whether the body is the full answer (`verbatim`), abbreviated notes, or absent (`not_collected`). Skipped apps are stored too, with a `skip_reason`, so the gap stays visible.
 
 **Mentions.** `src/ai_crypto_signals/parsing/mentions.py` matches tickers and names from a fixed registry. A rank such as `1 BTC` or `1. Bitcoin` is attached to that coin. Ambiguous tickers (`NEAR`, `UNI`, `DOT`, `OP`, and others listed in the registry) count only as `$TICKER`, `(TICKER)`, or a rank slot, so "near completion" is not a mention of NEAR Protocol. Names that are ordinary English words are matched in their official capitalization, or not matched as bare words (`Rain`, `Render`). Sentiment is a short lexicon (`bullish`, `dump`, and similar) applied to the rationale clause. Most clauses in this pilot come back `unspecified`.
 
@@ -108,19 +108,19 @@ In GitHub Actions the keys are repository secrets. The model overrides are repos
 
 Collected 2026-10-23.
 
-**Manual session, around 00:16–00:17 EDT.** ChatGPT (logged out, model name not shown, web citations used) and Gemini (signed in, label "Gemini Auto") were written down as rank lists. Both notes name BTC, ETH, SOL, XRP, LINK, in that order. Claude was skipped because the app required a login. Grok was skipped because a logged-out session returned no answer. The bodies are abbreviated notes, not full transcripts.
+**Manual session, 2026-10-23, about 09:08–09:09 AM ET.** Gemini (logged in, label "Gemini Auto", asked at 09:09 AM ET) returned a full answer. The body is that text, verbatim. The ranked list is BTC, ETH, SOL, LINK, XRP. The same answer also names Arbitrum and Optimism as rollup examples; those are mentions without a rank. ChatGPT (tried about 09:08 AM ET), Claude (about 09:09 AM ET), and Grok (about 09:09 AM ET, label Fast) were skipped because each app required a login. Those three files have no answer.
 
 **API pass, 2026-10-23T04:31:04Z.** No provider key was set in the environment. The collector wrote four skip records and did not call a model.
 
 **Markets, 2026-10-23T04:32:24Z.** CoinGecko returned all 20 watchlist coins. Polymarket returned 200 crypto-tagged markets. The CLOB returned midpoints for 390 Yes/No tokens (195 markets). Five Up/Down markets are in the slice with the Yes/No price columns left empty. Four markets in the slice already had an end time at or before collection, including the highest-volume Ethereum brackets dated 22 October, which Gamma still marked open.
 
-The notebook `notebooks/01_pilot_snapshot.ipynb` plots the 24-hour watchlist moves, the busiest open Yes/No markets, the two rank lists, and how often each ranked coin appears in the 200-market slice.
+The notebook `notebooks/01_pilot_snapshot.ipynb` plots the 24-hour watchlist moves, the busiest open Yes/No markets, the Gemini rank list, and how often each ranked coin appears in the 200-market slice.
 
 ## Results (in progress)
 
 There is no result yet on the study question.
 
-The two Day 1 notes name the same five coins in the same order. Their Jaccard overlap is 1 and the rank correlation is 1. That describes two writeups from a single sitting. It does not estimate how often these models agree.
+One manual answer is stored. Gemini ranks BTC, ETH, SOL, LINK, and XRP. ChatGPT, Claude, and Grok have no answer from this sitting, so there is no pair of lists to compare. That does not estimate how often these models agree.
 
 The lead-lag screen does not run. Prices exist on one UTC date, and the screen waits for a second date and at least eight coin-snapshot pairs before it reports a correlation. A later correlation would still be descriptive.
 
@@ -128,13 +128,13 @@ Nothing in the current tables supports a claim about which source sees the marke
 
 ## Limitations
 
-- The manual Day 1 texts are notes taken from the apps. Details that were not written down are absent. ChatGPT's session used web citations, and Gemini was on the "Auto" setting. The API collector, when a key exists, does not browse.
+- The Gemini file is the full chat-app answer. ChatGPT, Claude, and Grok were not collected because login was required. Gemini was on the "Auto" setting. The API collector, when a key exists, does not browse, so an API answer would be a different instrument from this chat.
 - The mention rules miss coins outside the registry and miss ambiguous tickers written as bare words. Unresolved rank-slot tickers are kept on the response row so the registry can be extended deliberately.
-- The sentiment tag is a lexicon on a short clause. On Day 1 every rationale is `unspecified`.
+- The sentiment tag is a lexicon on the rationale clause. This answer puts each reason on a following "Why watch" line, which the extractor does not attach, so the rationale column is empty and every tag is `unspecified`.
 - The Polymarket file is a volume-capped slice of one tag, not the full crypto board. High volume on a bracket that has already ended is still inside the raw file. The notebook's market chart drops those rows.
 - CoinGecko's free API can throttle or change fields. A failed call is an error, not a silent empty panel.
 - Model ids change. The pins above are a starting point.
-- Two answers and one snapshot cannot separate agreement, prompt sensitivity, or timing. They also cannot support a trading rule.
+- One answer and one snapshot cannot separate agreement, prompt sensitivity, or timing. They also cannot support a trading rule.
 
 ## Automation
 

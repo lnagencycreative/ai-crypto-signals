@@ -1,11 +1,31 @@
 response_id,collected_at,time_precision,provider,provider_label,model,status,skip_reason,source,prompt_id,transcript_fidelity,session_note,unresolved_symbols,text
-manual:2026-10-23_claude,2026-10-23T04:16:43Z,session,anthropic,Claude,,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. The chat app required a login, so there is no answer.",,No answer was collected.
-manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,timestamp,openai,ChatGPT,,ok,,manual_chat,weekly_watch_v1,abbreviated_session_notes,"Logged out, model name not shown, web citations used. Body is the rank list and reasons written down from the session, not a verbatim transcript.",,"Ranked: 1 BTC, 2 ETH, 3 SOL, 4 XRP, 5 LINK
-Reasons: BTC = market benchmark, ETF flows, Fed Oct 28; ETH = Glamsterdam Hoodi testnet Oct 26; SOL = Alpenglow upgrade live Oct 21; XRP = fixCleanup3_4_0 amendment ~Oct 23; LINK = oracle/RWA infrastructure, +20% since early Sept."
-manual:2026-10-23_grok,2026-10-23T04:16:43Z,session,xai,Grok,,skipped,logged-out session returned no answer,manual_chat,weekly_watch_v1,not_collected,Skipped. A logged-out session returned no answer.,,No answer was collected.
-manual:2026-10-23_gemini,2026-10-23T04:17:24Z,timestamp,google,Gemini,Gemini Auto,ok,,manual_chat,weekly_watch_v1,abbreviated_session_notes,"Signed in. The app label was Gemini Auto. Body is the rank list and reasons written down from the session, not a verbatim transcript.",,"Ranked: 1 BTC, 2 ETH, 3 SOL, 4 XRP, 5 LINK
-Reasons: BTC = bellwether, mid-$80k, ETF/Fed; ETH = $2,500-2,700, Glamsterdam testnets; SOL = $108-118, high beta; XRP = ~$1.49, ledger utility; LINK = oracle/tokenization barometer."
 api:20261023T043104Z_anthropic,2026-10-23T04:31:04Z,timestamp,anthropic,Claude,claude-sonnet-5,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
 api:20261023T043104Z_google,2026-10-23T04:31:04Z,timestamp,google,Gemini,gemini-2.5-flash,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
 api:20261023T043104Z_openai,2026-10-23T04:31:04Z,timestamp,openai,ChatGPT,gpt-4.1,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
 api:20261023T043104Z_xai,2026-10-23T04:31:04Z,timestamp,xai,Grok,grok-4.7,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
+manual:2026-10-23_chatgpt,2026-10-23T13:08:00Z,timestamp,openai,ChatGPT,,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. Login required. A guest page showed no model name. The composer accepted typing, then the message never sent and the URL showed noauth_recent_chat_failed.",,No answer was collected.
+manual:2026-10-23_claude,2026-10-23T13:09:00Z,timestamp,anthropic,Claude,,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. Login required. The app redirected to claude.ai/login, so there is no answer.",,No answer was collected.
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,timestamp,google,Gemini,Gemini Auto,ok,,manual_chat,weekly_watch_v1,verbatim,Logged in (account name shown: Lael). The app label was Gemini Auto. Body is the full answer text.,,"Here are five prominent cryptocurrencies to keep an eye on this week, ranked by their current market relevance, upcoming ecosystem catalysts, and technical setups:
+
+1. Bitcoin (BTC)
+
+Why watch: Bitcoin remains the primary bellwether for the entire digital asset market. This week, traders are closely monitoring institutional inflows via spot ETFs, macroeconomic data releases (such as inflation and interest rate outlooks), and key psychological resistance levels. As market liquidity shifts, BTC's dominance rate will dictate whether capital flows into altcoins or consolidates within large-cap assets.
+
+2. Ethereum (ETH)
+
+Why watch: Ethereum continues to anchor the decentralized finance (DeFi) and layer-2 ecosystem. Key metrics to watch this week include total value locked (TVL) across rollups (like Arbitrum, Optimism, and Base), gas fee dynamics, and institutional staking yields. Ethereum's price action often signals the broader health of smart contract platforms.
+
+3. Solana (SOL)
+
+Why watch: Solana maintains high transactional volume driven by active on-chain activity, memecoin trading, and decentralized exchange (DEX) volumes. Investors are tracking network stability, performance metrics, and upcoming developer updates. Its ability to sustain high throughput and user retention makes it a key asset to watch for momentum shifts.
+
+4. Chainlink (LINK)
+
+Why watch: As the leading decentralized oracle network, Chainlink is central to the tokenization of real-world assets (RWAs) and cross-chain interoperability (via the Cross-Chain Interoperability Protocol, or CCIP). Watch for enterprise partnerships, institutional adoption announcements, and integration metrics with traditional financial institutions exploring blockchain infrastructure.
+
+5. Ripple (XRP)
+
+Why watch: XRP frequently reacts to regulatory developments, legal updates, and cross-border payment partnerships. Market participants are monitoring liquidity trends across global exchanges and any updates regarding institutional payment corridors utilizing Ripple's technology stack.
+
+Disclaimer: This information is for educational and informational purposes only and does not constitute financial advice. Cryptocurrency markets are highly volatile; always conduct your own research before making investment decisions."
+manual:2026-10-23_grok,2026-10-23T13:09:00Z,timestamp,xai,Grok,Fast,skipped,login required,manual_chat,weekly_watch_v1,not_collected,Skipped. Login required. A guest session labeled Fast submitted the prompt and showed a sign-up wall instead of an answer.,,No answer was collected.

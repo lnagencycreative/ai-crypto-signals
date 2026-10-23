@@ -1,11 +1,8 @@
 response_id,collected_at,provider,provider_label,source,coingecko_id,symbol,name,rank,rank_source,in_ranked_list,rationale,sentiment_label,positive_terms,negative_terms,match_forms,in_watchlist
-manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,1,inline,True,"market benchmark, ETF flows, Fed Oct 28",unspecified,,,rank|ticker,True
-manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,2,inline,True,Glamsterdam Hoodi testnet Oct 26,unspecified,,,rank|ticker,True
-manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,3,inline,True,Alpenglow upgrade live Oct 21,unspecified,,,rank|ticker,True
-manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,4,inline,True,fixCleanup3_4_0 amendment ~Oct 23,unspecified,,,name|rank|ticker,True
-manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,openai,ChatGPT,manual_chat,chainlink,LINK,Chainlink,5,inline,True,"oracle/RWA infrastructure, +20% since early Sept",unspecified,,,rank|ticker,True
-manual:2026-10-23_gemini,2026-10-23T04:17:24Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,1,inline,True,"bellwether, mid-$80k, ETF/Fed",unspecified,,,rank|ticker,True
-manual:2026-10-23_gemini,2026-10-23T04:17:24Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,2,inline,True,"$2,500-2,700, Glamsterdam testnets",unspecified,,,rank|ticker,True
-manual:2026-10-23_gemini,2026-10-23T04:17:24Z,google,Gemini,manual_chat,solana,SOL,Solana,3,inline,True,"$108-118, high beta",unspecified,,,rank|ticker,True
-manual:2026-10-23_gemini,2026-10-23T04:17:24Z,google,Gemini,manual_chat,ripple,XRP,XRP,4,inline,True,"~$1.49, ledger utility",unspecified,,,name|rank|ticker,True
-manual:2026-10-23_gemini,2026-10-23T04:17:24Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,5,inline,True,oracle/tokenization barometer,unspecified,,,rank|ticker,True
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,solana,SOL,Solana,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,ripple,XRP,XRP,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,arbitrum,ARB,Arbitrum,,,False,,unspecified,,,name,False
+manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,optimism,OP,Optimism,,,False,,unspecified,,,name,False
