@@ -1,0 +1,287 @@
+"""Find coin mentions, ranks, and a small sentiment tag in one answer.
+
+The extractor is a set of rules, not a model. It is built for this study's
+prompt: a short ranked list, usually with tickers. Name matching uses the
+registry in ``config.py``. Sentiment is a keyword check on the clause that
+justifies a coin, and most clauses in this pilot come back ``unspecified``.
+"""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+
+from ai_crypto_signals.config import COINS, Coin
+
+# Ranks the prompt asks for five names. Slots past 10 are ignored so dates
+# and prices are less likely to look like a ranking.
+_RANK_TOKEN = re.compile(
+    r"(?:^|[\s,;:])#?(?P<rank>10|[1-9])\s*[.)\-:]?\s+\$?(?P<token>[A-Za-z][A-Za-z0-9]{1,24})\b"
+)
+_NUMBERED_LINE = re.compile(
+    r"(?m)^\s*#?\s*(?P<rank>10|[1-9])\s*[.)\-:]\s+(?P<body>.+?)\s*$"
+)
+_REASON_CLAUSE = re.compile(
+    r"(?:^|[;\n:]|\s)\s*(?P<ticker>[A-Z][A-Z0-9]{1,9})\s*=\s*(?P<reason>[^;\n]+)"
+)
+_BARE_TICKER = re.compile(r"\b(?P<ticker>[A-Z][A-Z0-9]{1,9})\b")
+_CONTEXT_TICKER = re.compile(
+    r"(?:\$(?P<dollar>[A-Z][A-Z0-9]{1,9})\b|\((?P<paren>[A-Z][A-Z0-9]{1,9})\))"
+)
+
+_POSITIVE = (
+    "bullish",
+    "upside",
+    "outperform",
+    "breakout",
+    "accumulate",
+    "rally",
+    "surge",
+    "momentum",
+)
+_NEGATIVE = (
+    "bearish",
+    "avoid",
+    "downside",
+    "underperform",
+    "sell-off",
+    "selloff",
+    "dump",
+    "crash",
+)
+
+
+@dataclass(frozen=True)
+class Mention:
+    coingecko_id: str
+    symbol: str
+    name: str
+    rank: int | None
+    rank_source: str
+    rationale: str
+    sentiment_label: str
+    positive_terms: tuple[str, ...]
+    negative_terms: tuple[str, ...]
+    match_forms: tuple[str, ...]
+    in_watchlist: bool
+
+
+@dataclass(frozen=True)
+class Extraction:
+    mentions: tuple[Mention, ...]
+    unresolved_symbols: tuple[str, ...]
+
+
+@dataclass
+class _Span:
+    coin: Coin
+    start: int
+    end: int
+    form: str
+
+
+def _ticker_index(coins: tuple[Coin, ...]) -> dict[str, Coin]:
+    index: dict[str, Coin] = {}
+    for coin in coins:
+        for ticker in coin.tickers():
+            index.setdefault(ticker, coin)
+    return index
+
+
+def _term_hits(text: str, vocabulary: tuple[str, ...]) -> tuple[str, ...]:
+    lowered = text.lower()
+    found = []
+    for term in vocabulary:
+        if re.search(rf"\b{re.escape(term)}\b", lowered):
+            found.append(term)
+    return tuple(found)
+
+
+def sentiment(text: str) -> tuple[str, tuple[str, ...], tuple[str, ...]]:
+    positive = _term_hits(text, _POSITIVE)
+    negative = _term_hits(text, _NEGATIVE)
+    if positive and negative:
+        label = "mixed"
+    elif positive:
+        label = "positive"
+    elif negative:
+        label = "negative"
+    else:
+        label = "unspecified"
+    return label, positive, negative
+
+
+def _name_spans(text: str, coins: tuple[Coin, ...]) -> list[_Span]:
+    spans: list[_Span] = []
+    for coin in coins:
+        for form in coin.name_forms():
+            flags = re.IGNORECASE if coin.form_ignorecase(form) else 0
+            pattern = re.compile(rf"\b{re.escape(form)}\b", flags)
+            for match in pattern.finditer(text):
+                spans.append(_Span(coin, match.start(), match.end(), "name"))
+    spans.sort(key=lambda span: (span.start, -(span.end - span.start)))
+    kept: list[_Span] = []
+    for span in spans:
+        if any(span.start >= prior.start and span.end <= prior.end for prior in kept):
+            continue
+        kept.append(span)
+    return kept
+
+
+def _resolve_token(token: str, ticker_index: dict[str, Coin], coins: tuple[Coin, ...]) -> Coin | None:
+    upper = token.upper()
+    if upper == token and upper in ticker_index:
+        return ticker_index[upper]
+    for coin in coins:
+        for form in coin.name_forms():
+            if coin.form_ignorecase(form) and form.casefold() == token.casefold():
+                return coin
+            if not coin.form_ignorecase(form) and form == token:
+                return coin
+    return None
+
+
+def _clean_reason(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip(" .;")
+
+
+def extract_mentions(text: str, coins: tuple[Coin, ...] | None = None) -> Extraction:
+    """Return one row per recognized coin, plus tickers we could not map."""
+    catalog = coins if coins is not None else COINS
+    ticker_index = _ticker_index(catalog)
+    contextual = {
+        ticker
+        for coin in catalog
+        for ticker in coin.contextual_tickers
+    }
+
+    spans = _name_spans(text, catalog)
+    covered = [(span.start, span.end) for span in spans]
+
+    def _inside_name(start: int, end: int) -> bool:
+        return any(start >= left and end <= right for left, right in covered)
+
+    forms: dict[str, set[str]] = {}
+    present: dict[str, Coin] = {}
+
+    def _add(coin: Coin, form: str) -> None:
+        present[coin.coingecko_id] = coin
+        forms.setdefault(coin.coingecko_id, set()).add(form)
+
+    for span in spans:
+        _add(span.coin, span.form)
+
+    for match in _BARE_TICKER.finditer(text):
+        ticker = match.group("ticker")
+        if ticker in contextual or ticker not in ticker_index:
+            continue
+        if _inside_name(match.start(), match.end()):
+            _add(ticker_index[ticker], "ticker")
+            continue
+        _add(ticker_index[ticker], "ticker")
+
+    for match in _CONTEXT_TICKER.finditer(text):
+        ticker = match.group("dollar") or match.group("paren")
+        coin = ticker_index.get(ticker)
+        if coin is None:
+            continue
+        _add(coin, "ticker")
+
+    ranks: dict[str, tuple[int, str]] = {}
+    unresolved: list[str] = []
+
+    def _assign_rank(coin: Coin, rank: int, source: str) -> None:
+        _add(coin, "rank")
+        current = ranks.get(coin.coingecko_id)
+        if current is None:
+            ranks[coin.coingecko_id] = (rank, source)
+            return
+        if current[0] != rank:
+            ranks[coin.coingecko_id] = (0, "conflict")
+
+    for match in _RANK_TOKEN.finditer(text):
+        rank = int(match.group("rank"))
+        token = match.group("token")
+        coin = _resolve_token(token, ticker_index, catalog)
+        if coin is None:
+            if token.isupper() and 2 <= len(token) <= 6 and token not in unresolved:
+                unresolved.append(token)
+            continue
+        _assign_rank(coin, rank, "inline")
+
+    for match in _NUMBERED_LINE.finditer(text):
+        rank = int(match.group("rank"))
+        body = match.group("body")
+        line_start = match.start("body")
+        # First coin mentioned on the line takes the line rank. Later coins
+        # on the same line stay mentions without inheriting that rank.
+        candidates = []
+        for inner in _RANK_TOKEN.finditer(body):
+            coin = _resolve_token(inner.group("token"), ticker_index, catalog)
+            if coin is not None:
+                candidates.append((inner.start(), coin))
+        for span in spans:
+            if line_start <= span.start < match.end():
+                candidates.append((span.start - line_start, span.coin))
+        if not candidates:
+            continue
+        candidates.sort(key=lambda item: item[0])
+        _assign_rank(candidates[0][1], rank, "numbered_line")
+
+    rationales: dict[str, str] = {}
+    for match in _REASON_CLAUSE.finditer(text):
+        coin = ticker_index.get(match.group("ticker"))
+        if coin is None:
+            continue
+        _add(coin, "ticker")
+        rationales.setdefault(coin.coingecko_id, _clean_reason(match.group("reason")))
+
+    for match in _NUMBERED_LINE.finditer(text):
+        body = match.group("body")
+        split = re.split(r"\s+[—–]\s+|\s+-\s+", body, maxsplit=1)
+        if len(split) != 2:
+            continue
+        line_start = match.start("body")
+        candidates = [span for span in spans if line_start <= span.start < match.end()]
+        if not candidates:
+            # Fall back to the coin that received this line's rank.
+            rank = int(match.group("rank"))
+            owners = [cid for cid, (value, source) in ranks.items() if value == rank]
+            if len(owners) == 1:
+                rationales.setdefault(owners[0], _clean_reason(split[1]))
+            continue
+        first = min(candidates, key=lambda span: span.start)
+        rationales.setdefault(first.coin.coingecko_id, _clean_reason(split[1]))
+
+    mentions: list[Mention] = []
+    for coin_id, coin in present.items():
+        rank_info = ranks.get(coin_id)
+        if rank_info is None:
+            rank: int | None = None
+            rank_source = ""
+        elif rank_info[1] == "conflict":
+            rank = None
+            rank_source = "conflict"
+        else:
+            rank = rank_info[0]
+            rank_source = rank_info[1]
+        rationale = rationales.get(coin_id, "")
+        label, positive, negative = sentiment(rationale)
+        mentions.append(
+            Mention(
+                coingecko_id=coin.coingecko_id,
+                symbol=coin.symbol,
+                name=coin.name,
+                rank=rank,
+                rank_source=rank_source,
+                rationale=rationale,
+                sentiment_label=label,
+                positive_terms=positive,
+                negative_terms=negative,
+                match_forms=tuple(sorted(forms[coin_id])),
+                in_watchlist=coin.in_watchlist,
+            )
+        )
+
+    mentions.sort(key=lambda item: (item.rank is None, item.rank or 0, item.symbol))
+    return Extraction(mentions=tuple(mentions), unresolved_symbols=tuple(unresolved))

@@ -1,0 +1,83 @@
+# Manual collection only.
+#
+# This file does not publish anything. It does not deploy GitHub Pages, cut a
+# release, or change repository visibility. The schedule block is commented
+# out so a merge cannot start a daily commit.
+#
+# Run it by hand: Actions -> Collect data -> Run workflow, and choose a branch
+# that is not main. The job refuses main and master.
+#
+# To collect on a schedule later:
+# 1. Uncomment the schedule block below.
+# 2. Keep the main-branch guard. Point the scheduled run at a data branch
+#    (repository setting "Choose a branch to run the workflow on", or check
+#    that branch out in a step) so commits never land on main.
+# 3. Add OPENAI_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY, and XAI_API_KEY as
+#    repository secrets only for the providers you want called. A blank secret
+#    is skipped. Optional OPENAI_MODEL, ANTHROPIC_MODEL, GEMINI_MODEL, and
+#    XAI_MODEL repository variables override the pinned model ids.
+
+name: Collect data
+
+on:
+  workflow_dispatch:
+
+  # schedule:
+  #   - cron: "15 13 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-data
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse the default branch
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          echo "Refusing to collect and commit on ${GITHUB_REF}."
+          echo "Run this workflow from a feature or data branch. It will not push to main."
+          exit 1
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Collect markets, LLM answers when keys exist, and rebuild tables
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          XAI_MODEL: ${{ vars.XAI_MODEL }}
+          PYTHONPATH: src
+        run: python -m ai_crypto_signals collect all
+
+      - name: Commit the snapshot on this branch
+        run: |
+          if [ "${GITHUB_REF}" = "refs/heads/main" ] || [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+            echo "Refusing to commit collected data to the default branch."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "data: collect snapshot"
+            git push
+          fi

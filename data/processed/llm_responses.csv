@@ -1,0 +1,11 @@
+response_id,collected_at,time_precision,provider,provider_label,model,status,skip_reason,source,prompt_id,transcript_fidelity,session_note,unresolved_symbols,text
+manual:2026-10-23_claude,2026-10-23T04:16:43Z,session,anthropic,Claude,,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. The chat app required a login, so there is no answer.",,No answer was collected.
+manual:2026-10-23_chatgpt,2026-10-23T04:16:43Z,timestamp,openai,ChatGPT,,ok,,manual_chat,weekly_watch_v1,abbreviated_session_notes,"Logged out, model name not shown, web citations used. Body is the rank list and reasons written down from the session, not a verbatim transcript.",,"Ranked: 1 BTC, 2 ETH, 3 SOL, 4 XRP, 5 LINK
+Reasons: BTC = market benchmark, ETF flows, Fed Oct 28; ETH = Glamsterdam Hoodi testnet Oct 26; SOL = Alpenglow upgrade live Oct 21; XRP = fixCleanup3_4_0 amendment ~Oct 23; LINK = oracle/RWA infrastructure, +20% since early Sept."
+manual:2026-10-23_grok,2026-10-23T04:16:43Z,session,xai,Grok,,skipped,logged-out session returned no answer,manual_chat,weekly_watch_v1,not_collected,Skipped. A logged-out session returned no answer.,,No answer was collected.
+manual:2026-10-23_gemini,2026-10-23T04:17:24Z,timestamp,google,Gemini,Gemini Auto,ok,,manual_chat,weekly_watch_v1,abbreviated_session_notes,"Signed in. The app label was Gemini Auto. Body is the rank list and reasons written down from the session, not a verbatim transcript.",,"Ranked: 1 BTC, 2 ETH, 3 SOL, 4 XRP, 5 LINK
+Reasons: BTC = bellwether, mid-$80k, ETF/Fed; ETH = $2,500-2,700, Glamsterdam testnets; SOL = $108-118, high beta; XRP = ~$1.49, ledger utility; LINK = oracle/tokenization barometer."
+api:20261023T043104Z_anthropic,2026-10-23T04:31:04Z,timestamp,anthropic,Claude,claude-sonnet-5,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
+api:20261023T043104Z_google,2026-10-23T04:31:04Z,timestamp,google,Gemini,gemini-2.5-flash,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
+api:20261023T043104Z_openai,2026-10-23T04:31:04Z,timestamp,openai,ChatGPT,gpt-4.1,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
+api:20261023T043104Z_xai,2026-10-23T04:31:04Z,timestamp,xai,Grok,grok-4.7,skipped,missing_api_key,llm_api,weekly_watch_v1,,,,
