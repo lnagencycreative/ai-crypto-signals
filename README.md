@@ -106,21 +106,23 @@ In GitHub Actions the keys are repository secrets. The model overrides are repos
 
 ## What is in the repository now
 
-Collected 2026-10-23.
+Collected 2026-10-23 and 2026-10-24.
 
 **Manual session, 2026-10-23, about 09:08–09:09 AM ET.** Gemini (logged in, label "Gemini Auto", asked at 09:09 AM ET) returned a full answer. The body is that text, verbatim. The ranked list is BTC, ETH, SOL, LINK, XRP. The same answer also names Arbitrum and Optimism as rollup examples; those are mentions without a rank. ChatGPT (tried about 09:08 AM ET), Claude (about 09:09 AM ET), and Grok (about 09:09 AM ET, label Fast) were skipped because each app required a login. Those three files have no answer.
+
+**Manual session, 2026-10-24, about 09:06–09:08 AM ET.** ChatGPT (guest, no model name shown, asked at 09:06:35 AM ET) and Gemini (logged in, label "Gemini Auto", asked at about 09:06 AM ET) each returned a full answer. The bodies are those texts, verbatim. ChatGPT ranks BTC, ETH, SOL, LINK, XRP. Gemini ranks BTC, ETH, SOL, LINK, HYPE. Claude (tried about 09:08 AM ET) and Grok (tried at 09:07:34 AM ET, label Fast) were skipped because each app required a login. Those two files have no answer.
 
 **API pass, 2026-10-23T04:31:04Z.** No provider key was set in the environment. The collector wrote four skip records and did not call a model.
 
 **Markets, 2026-10-23T04:32:24Z.** CoinGecko returned all 20 watchlist coins. Polymarket returned 200 crypto-tagged markets. The CLOB returned midpoints for 390 Yes/No tokens (195 markets). Five Up/Down markets are in the slice with the Yes/No price columns left empty. Four markets in the slice already had an end time at or before collection, including the highest-volume Ethereum brackets dated 22 October, which Gamma still marked open.
 
-The notebook `notebooks/01_pilot_snapshot.ipynb` plots the 24-hour watchlist moves, the busiest open Yes/No markets, the Gemini rank list, and how often each ranked coin appears in the 200-market slice.
+The notebook `notebooks/01_pilot_snapshot.ipynb` plots the 24-hour watchlist moves, the busiest open Yes/No markets, the manual rank lists, and how often each ranked coin appears in the 200-market slice.
 
 ## Results (in progress)
 
 There is no result yet on the study question.
 
-One manual answer is stored. Gemini ranks BTC, ETH, SOL, LINK, and XRP. ChatGPT, Claude, and Grok have no answer from this sitting, so there is no pair of lists to compare. That does not estimate how often these models agree.
+On 2026-10-23 only Gemini answered, so that date has no pair of lists. On 2026-10-24 ChatGPT and Gemini both rank BTC, ETH, SOL, and LINK in that order. ChatGPT's fifth coin is XRP and Gemini's fifth is HYPE. Four of the six coins named that day are shared, and those four have the same ranks. That describes one sitting. It does not estimate how often these models agree.
 
 The lead-lag screen does not run. Prices exist on one UTC date, and the screen waits for a second date and at least eight coin-snapshot pairs before it reports a correlation. A later correlation would still be descriptive.
 
@@ -128,13 +130,13 @@ Nothing in the current tables supports a claim about which source sees the marke
 
 ## Limitations
 
-- The Gemini file is the full chat-app answer. ChatGPT, Claude, and Grok were not collected because login was required. Gemini was on the "Auto" setting. The API collector, when a key exists, does not browse, so an API answer would be a different instrument from this chat.
+- The stored chat answers are the full text copied from the apps, including source tags that were on the page. On 2026-10-23 only Gemini answered. On 2026-10-24 ChatGPT was a guest session with no model name shown, and Gemini was on the "Auto" setting. Claude and Grok were not collected on either day because login was required. The API collector, when a key exists, does not browse, so an API answer would be a different instrument from these chats.
 - The mention rules miss coins outside the registry and miss ambiguous tickers written as bare words. Unresolved rank-slot tickers are kept on the response row so the registry can be extended deliberately.
-- The sentiment tag is a lexicon on the rationale clause. This answer puts each reason on a following "Why watch" line, which the extractor does not attach, so the rationale column is empty and every tag is `unspecified`.
+- The sentiment tag is a lexicon on the rationale clause. These answers put each reason on a later line ("Why watch", "Watch for", "Bullish signal"), which the extractor does not attach, so the rationale column is empty and every tag is `unspecified`.
 - The Polymarket file is a volume-capped slice of one tag, not the full crypto board. High volume on a bracket that has already ended is still inside the raw file. The notebook's market chart drops those rows.
 - CoinGecko's free API can throttle or change fields. A failed call is an error, not a silent empty panel.
 - Model ids change. The pins above are a starting point.
-- One answer and one snapshot cannot separate agreement, prompt sensitivity, or timing. They also cannot support a trading rule.
+- Two sittings and one price snapshot cannot separate agreement, prompt sensitivity, or timing. They also cannot support a trading rule.
 
 ## Automation
 

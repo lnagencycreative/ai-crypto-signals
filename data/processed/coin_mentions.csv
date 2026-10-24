@@ -6,3 +6,13 @@ manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,chainlin
 manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,ripple,XRP,XRP,5.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,arbitrum,ARB,Arbitrum,,,False,,unspecified,,,name,False
 manual:2026-10-23_gemini,2026-10-23T13:09:00Z,google,Gemini,manual_chat,optimism,OP,Optimism,,,False,,unspecified,,,name,False
+manual:2026-10-24_gemini,2026-10-24T13:06:00Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_gemini,2026-10-24T13:06:00Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_gemini,2026-10-24T13:06:00Z,google,Gemini,manual_chat,solana,SOL,Solana,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_gemini,2026-10-24T13:06:00Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_gemini,2026-10-24T13:06:00Z,google,Gemini,manual_chat,hyperliquid,HYPE,Hyperliquid,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,chainlink,LINK,Chainlink,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,5.0,inline,True,,unspecified,,,name|rank|ticker,True

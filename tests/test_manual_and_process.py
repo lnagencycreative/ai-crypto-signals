@@ -8,7 +8,7 @@ from ai_crypto_signals.parsing.manual import iter_manual_paths, load_manual_resp
 from ai_crypto_signals.processing.build import build_processed
 
 
-def test_day1_files_parse_and_examples_are_ignored():
+def test_manual_files_parse_and_examples_are_ignored():
     root = project_root()
     paths = iter_manual_paths(root)
     names = {path.name for path in paths}
@@ -17,25 +17,37 @@ def test_day1_files_parse_and_examples_are_ignored():
         "2026-10-23_gemini.md",
         "2026-10-23_claude.md",
         "2026-10-23_grok.md",
+        "2026-10-24_chatgpt.md",
+        "2026-10-24_gemini.md",
+        "2026-10-24_claude.md",
+        "2026-10-24_grok.md",
     }
-    responses = {item.provider: item for item in load_manual_responses(root)}
-    for provider in ("openai", "anthropic", "xai"):
-        assert responses[provider].status == "skipped"
-        assert responses[provider].skip_reason == "login required"
-        assert responses[provider].transcript_fidelity == "not_collected"
-        assert responses[provider].extraction.mentions == ()
-        assert responses[provider].text == "No answer was collected."
-    gemini = responses["google"]
-    assert gemini.status == "ok"
-    assert gemini.model == "Gemini Auto"
-    assert gemini.transcript_fidelity == "verbatim"
-    assert gemini.collected_at == "2026-10-23T13:09:00Z"
-    assert gemini.text.startswith("Here are five prominent cryptocurrencies to keep an eye on this week")
-    assert "4. Chainlink (LINK)" in gemini.text
-    assert "5. Ripple (XRP)" in gemini.text
-    assert gemini.text.endswith("always conduct your own research before making investment decisions.")
-    ranked = [(mention.rank, mention.symbol) for mention in gemini.extraction.mentions]
-    assert ranked == [
+    responses = {item.path: item for item in load_manual_responses(root)}
+
+    for name in (
+        "2026-10-23_chatgpt.md",
+        "2026-10-23_claude.md",
+        "2026-10-23_grok.md",
+        "2026-10-24_claude.md",
+        "2026-10-24_grok.md",
+    ):
+        skipped = responses[name]
+        assert skipped.status == "skipped"
+        assert skipped.skip_reason == "login required"
+        assert skipped.transcript_fidelity == "not_collected"
+        assert skipped.extraction.mentions == ()
+        assert skipped.text == "No answer was collected."
+
+    day1 = responses["2026-10-23_gemini.md"]
+    assert day1.status == "ok"
+    assert day1.model == "Gemini Auto"
+    assert day1.transcript_fidelity == "verbatim"
+    assert day1.collected_at == "2026-10-23T13:09:00Z"
+    assert day1.text.startswith("Here are five prominent cryptocurrencies to keep an eye on this week")
+    assert "4. Chainlink (LINK)" in day1.text
+    assert "5. Ripple (XRP)" in day1.text
+    assert day1.text.endswith("always conduct your own research before making investment decisions.")
+    assert [(mention.rank, mention.symbol) for mention in day1.extraction.mentions] == [
         (1, "BTC"),
         (2, "ETH"),
         (3, "SOL"),
@@ -44,8 +56,41 @@ def test_day1_files_parse_and_examples_are_ignored():
         (None, "ARB"),
         (None, "OP"),
     ]
-    assert responses["openai"].collected_at == "2026-10-23T13:08:00Z"
-    assert responses["xai"].model == "Fast"
+    assert responses["2026-10-23_chatgpt.md"].collected_at == "2026-10-23T13:08:00Z"
+    assert responses["2026-10-23_grok.md"].model == "Fast"
+
+    chatgpt = responses["2026-10-24_chatgpt.md"]
+    assert chatgpt.status == "ok"
+    assert chatgpt.model == ""
+    assert chatgpt.transcript_fidelity == "verbatim"
+    assert chatgpt.collected_at == "2026-10-24T13:06:35Z"
+    assert chatgpt.text.startswith("5 cryptocurrencies to watch this week")
+    assert chatgpt.text.endswith("ChatGPT is AI and can make mistakes.")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "XRP"),
+    ]
+
+    gemini = responses["2026-10-24_gemini.md"]
+    assert gemini.status == "ok"
+    assert gemini.model == "Gemini Auto"
+    assert gemini.transcript_fidelity == "verbatim"
+    assert gemini.collected_at == "2026-10-24T13:06:00Z"
+    assert gemini.text.startswith("The cryptocurrency market is navigating a critical consolidation phase")
+    assert "5. Hyperliquid (HYPE)" in gemini.text
+    assert gemini.text.endswith("Geco Capital")
+    assert [(mention.rank, mention.symbol) for mention in gemini.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "HYPE"),
+    ]
+    assert responses["2026-10-24_grok.md"].model == "Fast"
+    assert responses["2026-10-24_grok.md"].collected_at == "2026-10-24T13:07:34Z"
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):
