@@ -21,6 +21,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-24_gemini.md",
         "2026-10-24_claude.md",
         "2026-10-24_grok.md",
+        "2026-10-25_chatgpt.md",
+        "2026-10-25_gemini.md",
+        "2026-10-25_claude.md",
+        "2026-10-25_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -30,6 +34,8 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-23_grok.md",
         "2026-10-24_claude.md",
         "2026-10-24_grok.md",
+        "2026-10-25_claude.md",
+        "2026-10-25_grok.md",
     ):
         skipped = responses[name]
         assert skipped.status == "skipped"
@@ -91,6 +97,40 @@ def test_manual_files_parse_and_examples_are_ignored():
     ]
     assert responses["2026-10-24_grok.md"].model == "Fast"
     assert responses["2026-10-24_grok.md"].collected_at == "2026-10-24T13:07:34Z"
+
+    chatgpt_25 = responses["2026-10-25_chatgpt.md"]
+    assert chatgpt_25.status == "ok"
+    assert chatgpt_25.model == ""
+    assert chatgpt_25.transcript_fidelity == "verbatim"
+    assert chatgpt_25.collected_at == "2026-10-25T13:12:00Z"
+    assert chatgpt_25.text.startswith("For the week of October 26–November 1, 2026")
+    assert chatgpt_25.text.endswith("Fidelity Investments — Research Crypto ETFs Today (Ad)")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_25.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "XRP"),
+    ]
+    assert chatgpt_25.extraction.mentions[2].sentiment_label == "positive"
+
+    gemini_25 = responses["2026-10-25_gemini.md"]
+    assert gemini_25.status == "ok"
+    assert gemini_25.model == "Gemini Auto"
+    assert gemini_25.transcript_fidelity == "verbatim"
+    assert gemini_25.collected_at == "2026-10-25T13:15:00Z"
+    assert gemini_25.text.startswith("Evaluating and ranking cryptocurrencies involves subjective criteria")
+    assert "5. NEAR Protocol (NEAR)" in gemini_25.text
+    assert gemini_25.text.endswith("rather than financial advice.")
+    assert [(mention.rank, mention.symbol) for mention in gemini_25.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "ZEC"),
+        (5, "NEAR"),
+    ]
+    assert responses["2026-10-25_grok.md"].model == "Fast"
+    assert responses["2026-10-25_grok.md"].collected_at == "2026-10-25T13:18:00Z"
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):

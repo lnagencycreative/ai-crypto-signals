@@ -16,3 +16,13 @@ manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,ethere
 manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,3.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,chainlink,LINK,Chainlink,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-10-24_chatgpt,2026-10-24T13:06:35Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_chatgpt,2026-10-25T13:12:00Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,1.0,inline,True,Highest priority,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_chatgpt,2026-10-25T13:12:00Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,2.0,inline,True,Upgrade catalyst,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_chatgpt,2026-10-25T13:12:00Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,3.0,inline,True,Higher-upside watch,positive,upside,,name|rank|ticker,True
+manual:2026-10-25_chatgpt,2026-10-25T13:12:00Z,openai,ChatGPT,manual_chat,chainlink,LINK,Chainlink,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_chatgpt,2026-10-25T13:12:00Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_gemini,2026-10-25T13:15:00Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_gemini,2026-10-25T13:15:00Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_gemini,2026-10-25T13:15:00Z,google,Gemini,manual_chat,solana,SOL,Solana,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_gemini,2026-10-25T13:15:00Z,google,Gemini,manual_chat,zcash,ZEC,Zcash,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-25_gemini,2026-10-25T13:15:00Z,google,Gemini,manual_chat,near,NEAR,NEAR Protocol,5.0,inline,True,,unspecified,,,name|rank|ticker,True
