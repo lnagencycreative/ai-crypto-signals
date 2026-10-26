@@ -25,6 +25,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-25_gemini.md",
         "2026-10-25_claude.md",
         "2026-10-25_grok.md",
+        "2026-10-26_chatgpt.md",
+        "2026-10-26_gemini.md",
+        "2026-10-26_claude.md",
+        "2026-10-26_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -36,6 +40,7 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-24_grok.md",
         "2026-10-25_claude.md",
         "2026-10-25_grok.md",
+        "2026-10-26_claude.md",
     ):
         skipped = responses[name]
         assert skipped.status == "skipped"
@@ -131,6 +136,29 @@ def test_manual_files_parse_and_examples_are_ignored():
     ]
     assert responses["2026-10-25_grok.md"].model == "Fast"
     assert responses["2026-10-25_grok.md"].collected_at == "2026-10-25T13:18:00Z"
+
+    assert responses["2026-10-26_chatgpt.md"].skip_reason == "guest page reset with no answer"
+    assert responses["2026-10-26_chatgpt.md"].collected_at == "2026-10-26T13:07:00Z"
+    assert responses["2026-10-26_grok.md"].skip_reason == "sign-up wall"
+    assert responses["2026-10-26_grok.md"].model == "Fast"
+    assert responses["2026-10-26_grok.md"].collected_at == "2026-10-26T13:12:00Z"
+
+    gemini_26 = responses["2026-10-26_gemini.md"]
+    assert gemini_26.status == "ok"
+    assert gemini_26.model == "Auto"
+    assert gemini_26.transcript_fidelity == "verbatim"
+    assert gemini_26.collected_at == "2026-10-26T13:05:00Z"
+    assert gemini_26.text.startswith("5 top cryptocurrencies worth watching")
+    assert "5. Hyperliquid (HYPE) / Zcash (ZEC)" in gemini_26.text
+    assert gemini_26.text.endswith("not financial advice.")
+    assert [(mention.rank, mention.symbol) for mention in gemini_26.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "HYPE"),
+        (None, "ZEC"),
+    ]
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):

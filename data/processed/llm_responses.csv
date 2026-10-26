@@ -313,3 +313,44 @@ Key Factors to Watch: On-chain metrics have shown notable volume shifts. Key dev
 
 Disclaimer: Cryptocurrency markets are highly volatile and carry substantial risk. Market conditions change rapidly, and this information is provided for educational and informational purposes rather than financial advice."
 manual:2026-10-25_grok,2026-10-25T13:18:00Z,timestamp,xai,Grok,Fast,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. Login required. Guest, not logged in. The model selector showed Fast. The prompt was submitted and the page showed a sign-up wall instead of an answer: Sign up to continue seamlessly with Grok's full power.",,No answer was collected.
+manual:2026-10-26_gemini,2026-10-26T13:05:00Z,timestamp,google,Gemini,Auto,ok,,manual_chat,weekly_watch_v1,verbatim,"Signed in (account name shown: Lael). The model shown was Auto. New chat at gemini.google.com/app/0d4ae4b1cfcf89ad. Source-chip labels (Crypto.com, BuyUcoin) were kept as copied. Body is the full answer text.",,"5 top cryptocurrencies worth watching, ranked by market position, fundamental catalysts, and risk-reward profile:
+
+1. Bitcoin (BTC)
+
+Why Watch: Market Anchor & Key Macro Resistance
+
+Key Focus: As macro volatility stays elevated around Federal Reserve interest rate expectations, Bitcoin continues to act as the primary gauge for institutional liquidity. ETF flow dynamics and key technical levels make BTC the essential anchor asset to monitor before making broader altcoin moves.   
+Crypto.com
++ 1
+
+2. Ethereum (ETH)
+
+Why Watch: Upgrades & Relative Strength vs. BTC
+
+Key Focus: ETH has shown resilience and steady accumulation through its network upgrades. Watch the ETH/BTC ratio closely as Layer-2 ecosystem activity and protocol performance metrics draw institutional interest back into smart contract platforms.   
+Crypto.com
+
+3. Solana (SOL)
+
+Why Watch: High Throughput Momentum & Ecosystem Flow   
+BuyUcoin
+
+Key Focus: Solana remains one of the strongest performers among major Layer-1s in transaction velocity, DEX volume, and active addresses. Watch for potential breakouts or pullbacks near key moving averages.   
+BuyUcoin
+
+4. Chainlink (LINK)
+
+Why Watch: Institutional RWA (Real World Asset) Integration
+
+Key Focus: Chainlink’s Cross-Chain Interoperability Protocol (CCIP) continues to expand partnerships with traditional financial institutions looking to tokenize assets. LINK serves as a lower-beta, utility-driven watch for cross-chain connectivity growth.
+
+5. Hyperliquid (HYPE) / Zcash (ZEC)
+
+Why Watch: Niche Momentum & Protocol Innovation
+
+Key Focus: High-momentum decentralized perpetual platforms (like Hyperliquid) and privacy-focused protocols have shown localized relative strength. They offer higher-beta watch targets for traders tracking active protocol revenue and specialized capital rotation.
+
+Disclaimer: Crypto assets are highly volatile and speculative. This overview is for informational and educational purposes only, not financial advice."
+manual:2026-10-26_chatgpt,2026-10-26T13:07:00Z,timestamp,openai,ChatGPT,,skipped,guest page reset with no answer,manual_chat,weekly_watch_v1,not_collected,"Skipped. Guest, not signed in. The prompt was submitted three times, by script and by typing. Each time the message disappeared and the page reset to Where should we begin? No answer was produced. No login was attempted.",,No answer was collected.
+manual:2026-10-26_claude,2026-10-26T13:08:00Z,timestamp,anthropic,Claude,,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. Login required. Not signed in. The app redirected to claude.ai/login (Continue with Google, Apple, email, or SSO), so there is no answer.",,No answer was collected.
+manual:2026-10-26_grok,2026-10-26T13:12:00Z,timestamp,xai,Grok,Fast,skipped,sign-up wall,manual_chat,weekly_watch_v1,not_collected,"Skipped. Guest. The model selector showed Fast. The prompt was accepted and no answer appeared. The page showed a sign-up wall: Continue your conversation - Sign up to continue seamlessly with Grok's full power, with a Sign up for free button.",,No answer was collected.
