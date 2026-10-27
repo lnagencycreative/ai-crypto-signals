@@ -35,7 +35,7 @@ Part 3 waits on a panel. With one price date it is not estimated. When a correla
 
 **Manual answers.** When there is no API key, paste the answer into `data/raw/llm_manual/`. The format is in that folder's README. `transcript_fidelity` records whether the body is the full answer (`verbatim`), abbreviated notes, or absent (`not_collected`). Skipped apps are stored too, with a `skip_reason`, so the gap stays visible.
 
-**Mentions.** `src/ai_crypto_signals/parsing/mentions.py` matches tickers and names from a fixed registry. A rank such as `1 BTC` or `1. Bitcoin` is attached to that coin. Ambiguous tickers (`NEAR`, `UNI`, `DOT`, `OP`, and others listed in the registry) count only as `$TICKER`, `(TICKER)`, or a rank slot, so "near completion" is not a mention of NEAR Protocol. Names that are ordinary English words are matched in their official capitalization, or not matched as bare words (`Rain`, `Render`). Sentiment is a short lexicon (`bullish`, `dump`, and similar) applied to the rationale clause. Most clauses in this pilot come back `unspecified`.
+**Mentions.** `src/ai_crypto_signals/parsing/mentions.py` matches tickers and names from a fixed registry. A rank such as `1 BTC`, `1. Bitcoin`, or a table row `1 | Bitcoin` is attached to that coin. A row that already starts with a pipe is not a rank. Ambiguous tickers (`NEAR`, `UNI`, `DOT`, `OP`, and others listed in the registry) count only as `$TICKER`, `(TICKER)`, or a rank slot, so "near completion" is not a mention of NEAR Protocol. Names that are ordinary English words are matched in their official capitalization, or not matched as bare words (`Rain`, `Render`). Sentiment is a short lexicon (`bullish`, `dump`, and similar) applied to the rationale clause. Most clauses in this pilot come back `unspecified`.
 
 **Watchlist.** Frozen from CoinGecko's market-cap ranking on 2026-10-23. Walk the ranking, skip stablecoins and tokenized cash or gold, skip tokenized private credit (Figure Heloc), skip centralized-exchange tokens (WhiteBIT Coin, LEO Token), and keep the first 20 assets that remain. That rule includes Rain and Canton. Coins outside the 20, including Sui, Gram (formerly Toncoin), and the other entries in `COINS`, are recognized when an answer names them and are priced on those days. They are not in the daily panel.
 
@@ -106,7 +106,7 @@ In GitHub Actions the keys are repository secrets. The model overrides are repos
 
 ## What is in the repository now
 
-Collected 2026-10-23 through 2026-10-26.
+Collected 2026-10-23 through 2026-10-27.
 
 **Manual session, 2026-10-23, about 09:08–09:09 AM ET.** Gemini (logged in, label "Gemini Auto", asked at 09:09 AM ET) returned a full answer. The body is that text, verbatim. The ranked list is BTC, ETH, SOL, LINK, XRP. The same answer also names Arbitrum and Optimism as rollup examples; those are mentions without a rank. ChatGPT (tried about 09:08 AM ET), Claude (about 09:09 AM ET), and Grok (about 09:09 AM ET, label Fast) were skipped because each app required a login. Those three files have no answer.
 
@@ -115,6 +115,8 @@ Collected 2026-10-23 through 2026-10-26.
 **Manual session, 2026-10-25, about 09:12–09:18 AM ET.** The clocks in the captures are approximate. ChatGPT (guest, no model name shown, asked at 09:12:00 AM ET) and Gemini (logged in, label "Gemini Auto", asked at 09:15:00 AM ET) each returned a full answer. The bodies are those texts, verbatim. ChatGPT ranks BTC, ETH, SOL, LINK, XRP. Gemini ranks BTC, ETH, SOL, ZEC, NEAR. Claude (tried at 09:14 AM ET) and Grok (tried at 09:18 AM ET, label Fast) were skipped because each app required a login. Those two files have no answer.
 
 **Manual session, 2026-10-26, about 09:05–09:12 AM ET.** Gemini (signed in, model shown "Auto", asked at 09:05 AM ET) returned a full answer. The body is that text, verbatim. The ranked list is BTC, ETH, SOL, LINK, HYPE. The fifth line also names Zcash, which is stored as a mention without its own rank. ChatGPT (guest, tried at 09:07 AM ET) produced no answer: the message disappeared and the page reset, and no login was attempted. Claude (tried at 09:08 AM ET) was skipped because the app required a login. Grok (guest, label Fast, tried at 09:12 AM ET) was skipped because the page showed a sign-up wall. Those three files have no answer.
+
+**Manual session, 2026-10-27, about 09:04–09:06 AM ET.** ChatGPT (guest, no model name shown, asked at 09:05 AM ET) and Gemini (logged in, label "Gemini Auto", asked at 09:04 AM ET) each returned a full answer. The bodies are those texts, verbatim. ChatGPT ranks BTC, XRP, ETH, SOL, ZEC. Gemini ranks BTC, ETH, SOL, LINK, SUI. The Gemini ranks are in a comparison table (`1 | Bitcoin`), which the mention parser reads as ranks. Claude (tried at 09:05 AM ET) was skipped because the app required a login. Grok (guest, label Fast, tried at 09:06 AM ET) was skipped because the page showed a sign-up wall. Those two files have no answer.
 
 **API pass, 2026-10-23T04:31:04Z.** No provider key was set in the environment. The collector wrote four skip records and did not call a model.
 
@@ -126,7 +128,7 @@ The notebook `notebooks/01_pilot_snapshot.ipynb` plots the 24-hour watchlist mov
 
 There is no result yet on the study question.
 
-On 2026-10-23 only Gemini answered, so that date has no pair of lists. On 2026-10-24 ChatGPT and Gemini both rank BTC, ETH, SOL, and LINK in that order. ChatGPT's fifth coin is XRP and Gemini's fifth is HYPE. Four of the six coins named that day are shared, and those four have the same ranks. On 2026-10-25 both rank BTC, ETH, and SOL in that order. ChatGPT then names LINK and XRP. Gemini then names ZEC and NEAR. Three of the seven coins named that day are shared, and those three have the same ranks. On 2026-10-26 only Gemini answered, so that date has no pair of lists. That describes these sittings. It does not estimate how often these models agree.
+On 2026-10-23 only Gemini answered, so that date has no pair of lists. On 2026-10-24 ChatGPT and Gemini both rank BTC, ETH, SOL, and LINK in that order. ChatGPT's fifth coin is XRP and Gemini's fifth is HYPE. Four of the six coins named that day are shared, and those four have the same ranks. On 2026-10-25 both rank BTC, ETH, and SOL in that order. ChatGPT then names LINK and XRP. Gemini then names ZEC and NEAR. Three of the seven coins named that day are shared, and those three have the same ranks. On 2026-10-26 only Gemini answered, so that date has no pair of lists. On 2026-10-27 both answered. ChatGPT ranks BTC, XRP, ETH, SOL, ZEC. Gemini ranks BTC, ETH, SOL, LINK, SUI. Three of the seven coins named that day are shared, and those three are in the same order. BTC is rank 1 on both lists. ETH is 2 for Gemini and 3 for ChatGPT. SOL is 3 for Gemini and 4 for ChatGPT. That describes these sittings. It does not estimate how often these models agree.
 
 The lead-lag screen does not run. Prices exist on one UTC date, and the screen waits for a second date and at least eight coin-snapshot pairs before it reports a correlation. A later correlation would still be descriptive.
 
@@ -134,13 +136,13 @@ Nothing in the current tables supports a claim about which source sees the marke
 
 ## Limitations
 
-- The stored chat answers are the full text copied from the apps, including source tags that were on the page. On 2026-10-23 and 2026-10-26 only Gemini answered. On 2026-10-24 and 2026-10-25 ChatGPT was a guest session with no model name shown, and Gemini was on the "Auto" setting. Claude required a login on every day. Grok showed a sign-up wall on every day. On 2026-10-26 the ChatGPT guest page reset after submit and no login was attempted. The API collector, when a key exists, does not browse, so an API answer would be a different instrument from these chats.
+- The stored chat answers are the full text copied from the apps, including source tags that were on the page. On 2026-10-23 and 2026-10-26 only Gemini answered. On 2026-10-24, 2026-10-25, and 2026-10-27 ChatGPT was a guest session with no model name shown. Gemini was on the "Auto" or "Gemini Auto" setting. Claude required a login on every day. Grok showed a sign-up wall on every day. On 2026-10-26 the ChatGPT guest page reset after submit and no login was attempted. The API collector, when a key exists, does not browse, so an API answer would be a different instrument from these chats.
 - The mention rules miss coins outside the registry and miss ambiguous tickers written as bare words. Unresolved rank-slot tickers are kept on the response row so the registry can be extended deliberately.
 - The sentiment tag is a lexicon on the rationale clause. Most reasons sit on a later line ("Why watch", "Watch for", "Bullish signal"), which the extractor does not attach, so those tags stay `unspecified`. A reason on the rank line itself is tagged. On 2026-10-25 the ChatGPT line for Solana includes "upside", so that row is `positive`.
 - The Polymarket file is a volume-capped slice of one tag, not the full crypto board. High volume on a bracket that has already ended is still inside the raw file. The notebook's market chart drops those rows.
 - CoinGecko's free API can throttle or change fields. A failed call is an error, not a silent empty panel.
 - Model ids change. The pins above are a starting point.
-- Four sittings and one price snapshot cannot separate agreement, prompt sensitivity, or timing. They also cannot support a trading rule.
+- Five sittings and one price snapshot cannot separate agreement, prompt sensitivity, or timing. They also cannot support a trading rule.
 
 ## Automation
 

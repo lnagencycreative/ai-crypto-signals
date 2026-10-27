@@ -29,6 +29,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-26_gemini.md",
         "2026-10-26_claude.md",
         "2026-10-26_grok.md",
+        "2026-10-27_chatgpt.md",
+        "2026-10-27_gemini.md",
+        "2026-10-27_claude.md",
+        "2026-10-27_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -41,6 +45,7 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-25_claude.md",
         "2026-10-25_grok.md",
         "2026-10-26_claude.md",
+        "2026-10-27_claude.md",
     ):
         skipped = responses[name]
         assert skipped.status == "skipped"
@@ -159,6 +164,42 @@ def test_manual_files_parse_and_examples_are_ignored():
         (5, "HYPE"),
         (None, "ZEC"),
     ]
+
+    chatgpt_27 = responses["2026-10-27_chatgpt.md"]
+    assert chatgpt_27.status == "ok"
+    assert chatgpt_27.model == ""
+    assert chatgpt_27.transcript_fidelity == "verbatim"
+    assert chatgpt_27.collected_at == "2026-10-27T13:05:00Z"
+    assert chatgpt_27.text.startswith("5 cryptocurrencies to watch this week, ranked")
+    assert chatgpt_27.text.endswith("ChatGPT is AI and can make mistakes.")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_27.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "XRP"),
+        (3, "ETH"),
+        (4, "SOL"),
+        (5, "ZEC"),
+    ]
+
+    gemini_27 = responses["2026-10-27_gemini.md"]
+    assert gemini_27.status == "ok"
+    assert gemini_27.model == "Gemini Auto"
+    assert gemini_27.transcript_fidelity == "verbatim"
+    assert gemini_27.collected_at == "2026-10-27T13:04:00Z"
+    assert gemini_27.text.startswith("Top 5 Cryptocurrencies to Watch")
+    assert "5 | Sui (SUI)" in gemini_27.text
+    assert gemini_27.text.endswith("and real-time market data.")
+    assert [(mention.rank, mention.symbol) for mention in gemini_27.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "SUI"),
+    ]
+    assert gemini_27.extraction.mentions[4].rank_source == "table"
+
+    assert responses["2026-10-27_grok.md"].skip_reason == "sign-up wall"
+    assert responses["2026-10-27_grok.md"].model == "Fast"
+    assert responses["2026-10-27_grok.md"].collected_at == "2026-10-27T13:06:00Z"
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):

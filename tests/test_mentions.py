@@ -71,6 +71,24 @@ def test_contextual_ticker_needs_a_rank_slot_or_marker():
     assert marked["APT"].rank is None
 
 
+def test_pipe_table_assigns_the_row_rank_and_ignores_a_leading_pipe():
+    text = (
+        "1. Bitcoin (BTC) — benchmark\n"
+        "1 | BTC | a later summary of the same rank\n"
+        "| 2 | Bitcoin price and volume | not a rank list |\n"
+        "5 | Sui (SUI) | high-growth layer-1\n"
+    )
+    mentions, extraction = _by_symbol(text)
+    assert extraction.unresolved_symbols == ()
+    assert mentions["BTC"].rank == 1
+    # `1. Bitcoin` is also an inline rank token, so that earlier match keeps
+    # the source. The pipe row repeats rank 1 and must not replace the reason.
+    assert mentions["BTC"].rank_source == "inline"
+    assert mentions["BTC"].rationale == "benchmark"
+    assert mentions["SUI"].rank == 5
+    assert mentions["SUI"].rank_source == "table"
+
+
 def test_unresolved_rank_slot_is_kept():
     _, extraction = _by_symbol("Ranked: 1 BTC, 2 XYZ")
     assert extraction.unresolved_symbols == ("XYZ",)

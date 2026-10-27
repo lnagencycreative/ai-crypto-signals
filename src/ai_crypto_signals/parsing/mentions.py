@@ -21,6 +21,12 @@ _RANK_TOKEN = re.compile(
 _NUMBERED_LINE = re.compile(
     r"(?m)^\s*#?\s*(?P<rank>10|[1-9])\s*[.)\-:]\s+(?P<body>.+?)\s*$"
 )
+# Comparison tables in the chat apps sometimes state the rank as
+# `1 | Bitcoin (BTC) | ...`. A markdown row that already starts with a pipe
+# (`| 1 | Bitcoin price |`) is a notes table, not this rank list.
+_RANK_PIPE_LINE = re.compile(
+    r"(?m)^\s*(?P<rank>10|[1-9])\s*\|\s+(?P<body>.+?)\s*$"
+)
 _REASON_CLAUSE = re.compile(
     r"(?:^|[;\n:]|\s)\s*(?P<ticker>[A-Z][A-Z0-9]{1,9})\s*=\s*(?P<reason>[^;\n]+)"
 )
@@ -209,8 +215,7 @@ def extract_mentions(text: str, coins: tuple[Coin, ...] | None = None) -> Extrac
             continue
         _assign_rank(coin, rank, "inline")
 
-    for match in _NUMBERED_LINE.finditer(text):
-        rank = int(match.group("rank"))
+    def _first_coin_on_line(match) -> Coin | None:
         body = match.group("body")
         line_start = match.start("body")
         # First coin mentioned on the line takes the line rank. Later coins
@@ -224,9 +229,19 @@ def extract_mentions(text: str, coins: tuple[Coin, ...] | None = None) -> Extrac
             if line_start <= span.start < match.end():
                 candidates.append((span.start - line_start, span.coin))
         if not candidates:
-            continue
+            return None
         candidates.sort(key=lambda item: item[0])
-        _assign_rank(candidates[0][1], rank, "numbered_line")
+        return candidates[0][1]
+
+    for match in _NUMBERED_LINE.finditer(text):
+        coin = _first_coin_on_line(match)
+        if coin is not None:
+            _assign_rank(coin, int(match.group("rank")), "numbered_line")
+
+    for match in _RANK_PIPE_LINE.finditer(text):
+        coin = _first_coin_on_line(match)
+        if coin is not None:
+            _assign_rank(coin, int(match.group("rank")), "table")
 
     rationales: dict[str, str] = {}
     for match in _REASON_CLAUSE.finditer(text):

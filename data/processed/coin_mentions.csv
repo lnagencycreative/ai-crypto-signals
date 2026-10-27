@@ -32,3 +32,13 @@ manual:2026-10-26_gemini,2026-10-26T13:05:00Z,google,Gemini,manual_chat,solana,S
 manual:2026-10-26_gemini,2026-10-26T13:05:00Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-10-26_gemini,2026-10-26T13:05:00Z,google,Gemini,manual_chat,hyperliquid,HYPE,Hyperliquid,5.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-10-26_gemini,2026-10-26T13:05:00Z,google,Gemini,manual_chat,zcash,ZEC,Zcash,,,False,,unspecified,,,name|ticker,True
+manual:2026-10-27_gemini,2026-10-27T13:04:00Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,1.0,table,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_gemini,2026-10-27T13:04:00Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,2.0,table,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_gemini,2026-10-27T13:04:00Z,google,Gemini,manual_chat,solana,SOL,Solana,3.0,table,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_gemini,2026-10-27T13:04:00Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,4.0,table,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_gemini,2026-10-27T13:04:00Z,google,Gemini,manual_chat,sui,SUI,Sui,5.0,table,True,,unspecified,,,name|rank|ticker,False
+manual:2026-10-27_chatgpt,2026-10-27T13:05:00Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_chatgpt,2026-10-27T13:05:00Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_chatgpt,2026-10-27T13:05:00Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_chatgpt,2026-10-27T13:05:00Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-10-27_chatgpt,2026-10-27T13:05:00Z,openai,ChatGPT,manual_chat,zcash,ZEC,Zcash,5.0,inline,True,,unspecified,,,name|rank|ticker,True
