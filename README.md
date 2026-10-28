@@ -2,7 +2,7 @@
 
 Which cryptocurrencies do AI chatbots say to watch, what are prediction markets betting on, and which of those two records moves first?
 
-This is a pilot. It logs one fixed question to ChatGPT, Claude, Gemini, and Grok, a CoinGecko price panel, and a slice of Polymarket crypto markets. The aim is a clean daily record that a later, larger sample could use for a lead-lag description. The sample on hand is one manual sitting and one market snapshot. That is enough to show the pipeline. It is not enough to answer the timing question.
+This is a pilot. It logs a fixed prompt to ChatGPT, Claude, Gemini, and Grok, a CoinGecko price panel, and a slice of Polymarket crypto markets. The aim is a clean daily record that a later, larger sample could use for a lead-lag description. The sample on hand is one manual sitting and one market snapshot. That is enough to show the pipeline. It is not enough to answer the timing question.
 
 The project belongs to Lael Nowlin, founder of LN Agency, and is part of a fellowship application. The write-up stays descriptive on purpose.
 
@@ -12,11 +12,25 @@ This repository is a research record. Do not turn it into a public dashboard, Gi
 
 ## Question and design
 
-Every collection day asks each model the same prompt:
+Every collection day asks each model the same prompt. Two versions have been used.
+
+`weekly_watch_v1` ran from 2026-10-23 through 2026-10-27:
 
 > Which 5 cryptocurrencies would you recommend watching this week, and why? Rank them.
 
-The log stores the answer text, the coins it names, the rank when one is stated, and a keyword sentiment tag on the clause that justifies the coin. Alongside that, the job stores:
+`weekly_watch_return_v2` starts on 2026-10-28. It keeps that watch-list ask and adds a second list: which five coins would make the most money over the next 7 days. That second list is for a later comparison with CoinGecko returns and a Bitcoin buy-and-hold baseline. The v2 text, stored as `PROMPT` in `src/ai_crypto_signals/config.py`, is:
+
+> Please answer both parts.
+>
+> 1) Which 5 cryptocurrencies would you recommend watching this week? Rank them 1-5 with a brief reason for each.
+>
+> 2) Of the coins you would consider, which 5 would make the most money over the next 7 days (from now until the same time 7 days from now) if you had to pick? Rank them 1-5, where 1 = highest expected return over that fixed 7-day window. Give a brief reason for each.
+>
+> Label the two lists "Watch list" and "7-day return rank".
+
+The manual files already stored for the morning of 2026-10-28 were asked the v1 question and still record `weekly_watch_v1`.
+
+The log stores the answer text, the coins it names, the rank when one is stated, which list that rank belongs to (`watch` or `return_7d`), and a keyword sentiment tag on the clause that justifies the coin. Alongside that, the job stores:
 
 - CoinGecko prices, market caps, and volumes for a frozen watchlist of 20 coins, plus any extra coin the logs have named that is in the registry.
 - Polymarket odds for crypto-tagged markets: Gamma's outcome prices, and CLOB midpoints where the outcomes are Yes and No.
@@ -31,11 +45,13 @@ Part 3 waits on a panel. With one price date it is not estimated. When a correla
 
 ## Method
 
-**Prompt.** The text above is `weekly_watch_v1` in `src/ai_crypto_signals/config.py`. The API collector sends that text as the user message. It does not add a system prompt, it leaves temperature at the provider default, and it does not turn on browsing. A chat-app session that searched the web is a different instrument from an API call. Both can be stored. The `source` column keeps them apart (`manual_chat` or `llm_api`).
+**Prompt.** The current text is `weekly_watch_return_v2` in `src/ai_crypto_signals/config.py`. `weekly_watch_v1` is the earlier prompt, used on 2026-10-23 through 2026-10-27. The API collector sends the current text as the user message. It does not add a system prompt, it leaves temperature at the provider default, and it does not turn on browsing. A chat-app session that searched the web is a different instrument from an API call. Both can be stored. The `source` column keeps them apart (`manual_chat` or `llm_api`). Each stored answer also keeps the `prompt_id` it was asked with.
 
 **Manual answers.** When there is no API key, paste the answer into `data/raw/llm_manual/`. The format is in that folder's README. `transcript_fidelity` records whether the body is the full answer (`verbatim`), abbreviated notes, or absent (`not_collected`). Skipped apps are stored too, with a `skip_reason`, so the gap stays visible.
 
 **Mentions.** `src/ai_crypto_signals/parsing/mentions.py` matches tickers and names from a fixed registry. A rank such as `1 BTC`, `1. Bitcoin`, or a table row `1 | Bitcoin` is attached to that coin. A row that already starts with a pipe is not a rank. Ambiguous tickers (`NEAR`, `UNI`, `DOT`, `OP`, and others listed in the registry) count only as `$TICKER`, `(TICKER)`, or a rank slot, so "near completion" is not a mention of NEAR Protocol. Names that are ordinary English words are matched in their official capitalization, or not matched as bare words (`Rain`, `Render`). Sentiment is a short lexicon (`bullish`, `dump`, and similar) applied to the rationale clause. Most clauses in this pilot come back `unspecified`.
+
+When an answer contains the label "7-day return rank", the extractor splits there before it assigns ranks. Text before the label is `list_type` `watch`. The label and the text after it are `return_7d`. A coin can be 1 on the watch list and 3 on the 7-day list, and those are two rows in `data/processed/coin_mentions.csv`. An answer with no such label, including every `weekly_watch_v1` log, is entirely `watch`. A line that only repeats the instruction to label the lists is not the split point. The agreement table compares the watch list only, so the 7-day ranks are not mixed into that overlap.
 
 **Watchlist.** Frozen from CoinGecko's market-cap ranking on 2026-10-23. Walk the ranking, skip stablecoins and tokenized cash or gold, skip tokenized private credit (Figure Heloc), skip centralized-exchange tokens (WhiteBIT Coin, LEO Token), and keep the first 20 assets that remain. That rule includes Rain and Canton. Coins outside the 20, including Sui, Gram (formerly Toncoin), and the other entries in `COINS`, are recognized when an answer names them and are priced on those days. They are not in the daily panel.
 

@@ -1,5 +1,5 @@
-from ai_crypto_signals.config import COINS, watchlist_ids
-from ai_crypto_signals.parsing.mentions import extract_mentions
+from ai_crypto_signals.config import COINS, PROMPT, PROMPT_ID, watchlist_ids
+from ai_crypto_signals.parsing.mentions import extract_answer_mentions, extract_mentions
 
 DAY1 = (
     "Ranked: 1 BTC, 2 ETH, 3 SOL, 4 XRP, 5 LINK\n"
@@ -93,6 +93,58 @@ def test_unresolved_rank_slot_is_kept():
     _, extraction = _by_symbol("Ranked: 1 BTC, 2 XYZ")
     assert extraction.unresolved_symbols == ("XYZ",)
     assert [mention.symbol for mention in extraction.mentions] == ["BTC"]
+
+
+def test_prompt_keeps_the_watch_list_and_adds_a_7_day_rank():
+    assert PROMPT_ID == "weekly_watch_return_v2"
+    assert "Which 5 cryptocurrencies would you recommend watching this week?" in PROMPT
+    assert "which 5 would make the most money" in PROMPT
+    assert 'Label the two lists "Watch list" and "7-day return rank".' in PROMPT
+
+
+def test_two_lists_keep_separate_ranks():
+    text = (
+        "Watch list\n"
+        "1. Bitcoin (BTC) — benchmark\n"
+        "2. Ethereum (ETH) — fees\n"
+        "\n"
+        "7-day return rank\n"
+        "1. Solana (SOL) — highest expected return\n"
+        "2. Bitcoin (BTC) — still positive, behind Solana\n"
+    )
+    extraction = extract_answer_mentions(text)
+    got = [(mention.list_type, mention.rank, mention.symbol) for mention in extraction.mentions]
+    assert got == [
+        ("watch", 1, "BTC"),
+        ("watch", 2, "ETH"),
+        ("return_7d", 1, "SOL"),
+        ("return_7d", 2, "BTC"),
+    ]
+    assert extraction.unresolved_symbols == ()
+
+
+def test_echoed_label_instruction_does_not_steal_the_split():
+    text = (
+        'Label the two lists "Watch list" and "7-day return rank".\n'
+        "\n"
+        "Watch list\n"
+        "1. Bitcoin (BTC) — benchmark\n"
+        "\n"
+        "**7-day return rank**\n"
+        "1. Ethereum (ETH) — higher expected return\n"
+    )
+    extraction = extract_answer_mentions(text)
+    got = [(mention.list_type, mention.rank, mention.symbol) for mention in extraction.mentions]
+    assert got == [
+        ("watch", 1, "BTC"),
+        ("return_7d", 1, "ETH"),
+    ]
+
+
+def test_answer_without_the_return_label_is_all_watch():
+    extraction = extract_answer_mentions(DAY1)
+    assert {mention.list_type for mention in extraction.mentions} == {"watch"}
+    assert [mention.rank for mention in extraction.mentions] == [1, 2, 3, 4, 5]
 
 
 def test_sentiment_lexicon_reads_the_rationale_only():

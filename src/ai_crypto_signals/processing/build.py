@@ -13,7 +13,7 @@ import pandas as pd
 
 from ai_crypto_signals.config import coins_by_id, data_paths
 from ai_crypto_signals.parsing.manual import load_manual_responses
-from ai_crypto_signals.parsing.mentions import Extraction, Mention, extract_mentions
+from ai_crypto_signals.parsing.mentions import Extraction, Mention, extract_answer_mentions, extract_mentions
 from ai_crypto_signals.util import parse_json_list, parse_time, read_json, to_float
 
 PRICE_COLUMNS = [
@@ -80,6 +80,7 @@ MENTION_COLUMNS = [
     "coingecko_id",
     "symbol",
     "name",
+    "list_type",
     "rank",
     "rank_source",
     "in_ranked_list",
@@ -253,6 +254,7 @@ def _mention_dict(
         "coingecko_id": mention.coingecko_id,
         "symbol": mention.symbol,
         "name": mention.name,
+        "list_type": mention.list_type,
         "rank": mention.rank,
         "rank_source": mention.rank_source,
         "in_ranked_list": mention.rank is not None,
@@ -303,7 +305,7 @@ def _response_rows(root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any
         response_id = "api:" + path.stem
         status = str(payload.get("status") or "")
         text = payload.get("response_text") or ""
-        extraction = extract_mentions(text) if status == "ok" and text else extract_mentions("")
+        extraction = extract_answer_mentions(text) if status == "ok" and text else extract_answer_mentions("")
         responses.append(
             {
                 "response_id": response_id,
@@ -364,11 +366,14 @@ def build_processed(root: Path | None = None) -> dict[str, pd.DataFrame]:
         ).reset_index(drop=True)
     mentions = _frame(mention_rows, MENTION_COLUMNS)
     if not mentions.empty:
+        mentions["_list_sort"] = (
+            mentions["list_type"].map({"watch": 0, "return_7d": 1}).fillna(9)
+        )
         mentions["_rank_sort"] = mentions["rank"].fillna(99)
         mentions = mentions.sort_values(
-            ["collected_at", "provider", "_rank_sort", "symbol"],
+            ["collected_at", "provider", "_list_sort", "_rank_sort", "symbol"],
             kind="mergesort",
-        ).drop(columns="_rank_sort").reset_index(drop=True)
+        ).drop(columns=["_list_sort", "_rank_sort"]).reset_index(drop=True)
 
     processed = base["processed"]
     frames = {

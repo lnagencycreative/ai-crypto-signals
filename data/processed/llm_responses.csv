@@ -494,3 +494,39 @@ This is a ranking of what I would monitor, not a claim that these assets will ri
 
 ChatGPT is AI and can make mistakes."
 manual:2026-10-27_grok,2026-10-27T13:06:00Z,timestamp,xai,Grok,Fast,skipped,sign-up wall,manual_chat,weekly_watch_v1,not_collected,"Skipped. Guest, not logged in. The model selector showed Fast. The prompt was submitted once and no answer was generated. The page showed a sign-up wall: Continue your conversation - Sign up to continue seamlessly with Grok's full power, with a Sign up for free button. The URL stayed https://grok.com/. No account was created.",,No answer was collected.
+manual:2026-10-28_chatgpt,2026-10-28T13:05:00Z,timestamp,openai,ChatGPT,,skipped,guest page reset with no answer,manual_chat,weekly_watch_v1,not_collected,"Skipped. Guest, not logged in (Log in and Sign up for free buttons shown). No model name was shown. The prompt was typed and sent once; the message disappeared, no chat was created, the URL stayed https://chatgpt.com/, and the page reset to Where should we begin? No login was attempted.",,No answer was collected.
+manual:2026-10-28_claude,2026-10-28T13:06:00Z,timestamp,anthropic,Claude,,skipped,login required,manual_chat,weekly_watch_v1,not_collected,"Skipped. Login required. Not logged in. The app redirected to claude.ai/login?from=logout&reauth=1&returnTo=%2Fnew%3F (Continue with Google, Apple, email, or SSO). No guest chat was available, and no login was attempted, so there is no answer.",,No answer was collected.
+manual:2026-10-28_gemini,2026-10-28T13:06:00Z,timestamp,google,Gemini,,ok,,manual_chat,weekly_watch_v1,verbatim,Logged in (account name not read; existing chat history shown). No model label was read. New chat at gemini.google.com/app/b3a59f60320c7ead. Body is the full answer text read from the page (not the copy button); stray Binance source-citation labels are kept as shown. The answer listed the five coins in ranked order without numbers.,,"Bitcoin (BTC)
+
+Why watch: As the primary macro-benchmark holding ~60% of overall crypto market dominance, Bitcoin sets the broader sentiment for all digital assets.
+Binance
+
+Key focus: Traders are closely watching support around key exponential moving averages and resistance near multi-month consolidation ranges.
+Binance
+
+Ethereum (ETH)
+
+Why watch: Ethereum remains the core liquidity hub for decentralized applications and institutional smart contract activity.
+Binance
+
+Key focus: Watching for a potential trend reversal toward key resistance levels after recent consolidation, along with tracking net inflows across spot Ether ETFs.
+
+Solana (SOL)
+
+Why watch: Leading active layer-1 networks in daily transaction volume, decentralized exchange (DEX) throughput, and user activity.
+
+Key focus: Resistance tests following network performance updates and developer momentum in the DeFi and consumer dApp ecosystems.
+
+XRP (XRP)
+
+Why watch: Highly sensitive to cross-border payment utility and ongoing institutional settlement integration announcements.
+
+Key focus: Breakout confirmation backed by spot exchange volume spikes and regulatory developments.
+
+Zcash (ZEC)
+
+Why watch: Privacy-focused protocols have experienced localized spikes in volatility and renewed market interest.
+Binance
+
+Key focus: Monitoring volume sustainability and shielded transaction activity to determine whether recent momentum is persistent or short-lived."
+manual:2026-10-28_grok,2026-10-28T13:06:00Z,timestamp,xai,Grok,Fast,skipped,sign-up wall,manual_chat,weekly_watch_v1,not_collected,"Skipped. Guest, not logged in. The model selector showed Fast. The prompt was submitted once and no answer was generated after about 18 seconds. The page showed a sign-up wall: Continue your conversation - Sign up to continue seamlessly with Grok's full power, with a Sign up for free button. The URL stayed https://grok.com/. No account was created.",,No answer was collected.

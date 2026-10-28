@@ -55,7 +55,11 @@ def _print_manual(root: Path) -> int:
         return 0
     for response in responses:
         ranked = [
-            f"{mention.rank}:{mention.symbol}" if mention.rank else mention.symbol
+            (
+                f"{mention.list_type}:{mention.rank}:{mention.symbol}"
+                if mention.rank
+                else f"{mention.list_type}:{mention.symbol}"
+            )
             for mention in response.extraction.mentions
         ]
         print(

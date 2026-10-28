@@ -68,6 +68,8 @@ def agreement_table(mentions: pd.DataFrame) -> pd.DataFrame:
     """Pairwise overlap of coins named by two providers on the same UTC date.
 
     Skipped providers never appear here, because they have no mention rows.
+    When ``list_type`` is present, only the watch list is compared. The
+    7-day return rank is stored separately and is not mixed into these ranks.
     """
     columns = [
         "date",
@@ -83,6 +85,10 @@ def agreement_table(mentions: pd.DataFrame) -> pd.DataFrame:
     if mentions.empty:
         return pd.DataFrame(columns=columns)
     frame = mentions.copy()
+    if "list_type" in frame.columns:
+        list_type = frame["list_type"].fillna("watch").astype(str).str.strip()
+        list_type = list_type.replace({"": "watch"})
+        frame = frame.loc[list_type.eq("watch")].copy()
     frame["date"] = frame["collected_at"].map(_utc_date)
     rows: list[dict[str, Any]] = []
     for day, day_frame in frame.groupby("date", dropna=True):

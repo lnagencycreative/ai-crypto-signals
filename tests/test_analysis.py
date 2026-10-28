@@ -27,6 +27,62 @@ def test_agreement_on_a_shared_ranking():
     assert row["n_overlap"] == 2
 
 
+def test_agreement_keeps_the_7_day_rank_out_of_the_watch_overlap():
+    mentions = pd.DataFrame(
+        [
+            {
+                "collected_at": "2026-10-28T13:00:00Z",
+                "provider": "openai",
+                "coingecko_id": "bitcoin",
+                "rank": 1,
+                "list_type": "watch",
+            },
+            {
+                "collected_at": "2026-10-28T13:00:00Z",
+                "provider": "openai",
+                "coingecko_id": "ethereum",
+                "rank": 2,
+                "list_type": "watch",
+            },
+            {
+                "collected_at": "2026-10-28T13:00:00Z",
+                "provider": "openai",
+                "coingecko_id": "bitcoin",
+                "rank": 5,
+                "list_type": "return_7d",
+            },
+            {
+                "collected_at": "2026-10-28T13:00:00Z",
+                "provider": "google",
+                "coingecko_id": "bitcoin",
+                "rank": 1,
+                "list_type": "watch",
+            },
+            {
+                "collected_at": "2026-10-28T13:00:00Z",
+                "provider": "google",
+                "coingecko_id": "ethereum",
+                "rank": 2,
+                "list_type": "watch",
+            },
+            {
+                "collected_at": "2026-10-28T13:00:00Z",
+                "provider": "google",
+                "coingecko_id": "solana",
+                "rank": 1,
+                "list_type": "return_7d",
+            },
+        ]
+    )
+    table = agreement_table(mentions)
+    assert len(table) == 1
+    row = table.iloc[0]
+    assert row["n_a"] == 2
+    assert row["n_b"] == 2
+    assert row["n_overlap"] == 2
+    assert row["spearman_rank"] == pytest.approx(1)
+
+
 def test_lead_lag_waits_for_a_second_date():
     prices = pd.DataFrame(
         [

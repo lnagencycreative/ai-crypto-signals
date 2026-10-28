@@ -68,14 +68,14 @@ def test_manual_files_parse_and_examples_are_ignored():
     assert "4. Chainlink (LINK)" in day1.text
     assert "5. Ripple (XRP)" in day1.text
     assert day1.text.endswith("always conduct your own research before making investment decisions.")
-    assert [(mention.rank, mention.symbol) for mention in day1.extraction.mentions] == [
-        (1, "BTC"),
-        (2, "ETH"),
-        (3, "SOL"),
-        (4, "LINK"),
-        (5, "XRP"),
-        (None, "ARB"),
-        (None, "OP"),
+    assert [(mention.list_type, mention.rank, mention.symbol) for mention in day1.extraction.mentions] == [
+        ("watch", 1, "BTC"),
+        ("watch", 2, "ETH"),
+        ("watch", 3, "SOL"),
+        ("watch", 4, "LINK"),
+        ("watch", 5, "XRP"),
+        ("watch", None, "ARB"),
+        ("watch", None, "OP"),
     ]
     assert responses["2026-10-23_chatgpt.md"].collected_at == "2026-10-23T13:08:00Z"
     assert responses["2026-10-23_grok.md"].model == "Fast"
@@ -314,6 +314,7 @@ def test_process_rebuilds_tables_from_raw(tmp_path: Path):
     frames = build_processed(tmp_path)
     assert list(frames["coin_mentions"]["symbol"]) == ["BTC"]
     assert frames["coin_mentions"].iloc[0]["rank"] == 1
+    assert frames["coin_mentions"].iloc[0]["list_type"] == "watch"
     assert frames["prices"].iloc[0]["price_usd"] == 100.0
     assert frames["prices"].iloc[0]["in_watchlist"] == True  # noqa: E712
     odds = frames["polymarket_odds"].iloc[0]
@@ -332,3 +333,37 @@ def test_process_rebuilds_tables_from_raw(tmp_path: Path):
         .split("---", 2)[1]
     )
     assert day1["prompt"].startswith("Which 5 cryptocurrencies")
+
+
+def test_processed_mentions_split_the_7_day_return_list(tmp_path: Path):
+    manual = tmp_path / "data" / "raw" / "llm_manual"
+    manual.mkdir(parents=True)
+    (manual / "note.md").write_text(
+        "---\n"
+        "provider: chatgpt\n"
+        'collected_at: "2026-10-28T13:00:00Z"\n'
+        "prompt_id: weekly_watch_return_v2\n"
+        "transcript_fidelity: verbatim\n"
+        "---\n\n"
+        "Watch list\n"
+        "1. Bitcoin (BTC) — benchmark\n"
+        "2. Ethereum (ETH) — fees\n"
+        "\n"
+        "7-day return rank\n"
+        "1. Solana (SOL) — highest expected return\n"
+        "2. Bitcoin (BTC) — still positive, behind Solana\n",
+        encoding="utf-8",
+    )
+    frames = build_processed(tmp_path)
+    rows = frames["coin_mentions"]
+    got = [
+        (list_type, int(rank), symbol)
+        for list_type, rank, symbol in zip(rows["list_type"], rows["rank"], rows["symbol"])
+    ]
+    assert got == [
+        ("watch", 1, "BTC"),
+        ("watch", 2, "ETH"),
+        ("return_7d", 1, "SOL"),
+        ("return_7d", 2, "BTC"),
+    ]
+    assert list(rows.columns).count("list_type") == 1

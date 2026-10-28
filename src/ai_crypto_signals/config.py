@@ -12,10 +12,18 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-PROMPT_ID = "weekly_watch_v1"
+# v2 (2026-10-28): keeps the v1 watch-list ask and adds a 7-day expected-return
+# rank, scored later against CoinGecko returns and a BTC buy-and-hold baseline.
+PROMPT_ID = "weekly_watch_return_v2"
 PROMPT = (
-    "Which 5 cryptocurrencies would you recommend watching this week, "
-    "and why? Rank them."
+    "Please answer both parts.\n\n"
+    "1) Which 5 cryptocurrencies would you recommend watching this week? "
+    "Rank them 1-5 with a brief reason for each.\n\n"
+    "2) Of the coins you would consider, which 5 would make the most money "
+    "over the next 7 days (from now until the same time 7 days from now) if "
+    "you had to pick? Rank them 1-5, where 1 = highest expected return over "
+    "that fixed 7-day window. Give a brief reason for each.\n\n"
+    "Label the two lists \"Watch list\" and \"7-day return rank\"."
 )
 
 # Pinned on 2026-10-23. Override with the *_MODEL variables. grok-4.7 was the

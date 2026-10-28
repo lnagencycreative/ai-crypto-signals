@@ -4,12 +4,17 @@ The extractor is a set of rules, not a model. It is built for this study's
 prompt: a short ranked list, usually with tickers. Name matching uses the
 registry in ``config.py``. Sentiment is a keyword check on the clause that
 justifies a coin, and most clauses in this pilot come back ``unspecified``.
+
+v2 answers contain two numbered lists. ``extract_answer_mentions`` splits on
+the "7-day return rank" label so those ranks stay in separate rows
+(``list_type`` ``watch`` or ``return_7d``). ``extract_mentions`` parses one
+section and does not split.
 """
 
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from ai_crypto_signals.config import COINS, Coin
 
@@ -34,6 +39,20 @@ _BARE_TICKER = re.compile(r"\b(?P<ticker>[A-Z][A-Z0-9]{1,9})\b")
 _CONTEXT_TICKER = re.compile(
     r"(?:\$(?P<dollar>[A-Z][A-Z0-9]{1,9})\b|\((?P<paren>[A-Z][A-Z0-9]{1,9})\))"
 )
+
+# v2 labels the second list "7-day return rank". A line that only repeats the
+# instruction ("Label the two lists ...") is not the start of that list.
+_RETURN_RANK_HEADING = re.compile(
+    r"(?im)^[ \t>*#_]*"
+    r"(?:(?:part\s+)?\d{1,2}\s*[.)]\s*)?"
+    r"(?:\*\*|__)?\s*"
+    r"7\s*[-–—]?\s*day\s+return\s+rank\b"
+)
+_RETURN_RANK_LOOSE = re.compile(
+    r"7\s*[-–—]?\s*day\s+return\s+rank",
+    re.IGNORECASE,
+)
+_LABEL_INSTRUCTION = re.compile(r"label the two lists", re.IGNORECASE)
 
 _POSITIVE = (
     "bullish",
@@ -70,6 +89,9 @@ class Mention:
     negative_terms: tuple[str, ...]
     match_forms: tuple[str, ...]
     in_watchlist: bool
+    # ``watch`` is the week's watch list. ``return_7d`` is the 7-day
+    # expected-return rank. v1 answers are entirely ``watch``.
+    list_type: str = "watch"
 
 
 @dataclass(frozen=True)
@@ -149,6 +171,68 @@ def _resolve_token(token: str, ticker_index: dict[str, Coin], coins: tuple[Coin,
 
 def _clean_reason(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip(" .;")
+
+
+def _instruction_mention(text: str, start: int) -> bool:
+    window = text[max(0, start - 80) : start]
+    return _LABEL_INSTRUCTION.search(window) is not None
+
+
+def _return_rank_start(text: str) -> int | None:
+    """Index where the 7-day return list begins, if the answer has one.
+
+    A heading wins over a mid-sentence mention. The sentence in the prompt
+    that tells the model to label the lists is not a heading, and it is
+    skipped when it is the only match.
+    """
+    heading = _RETURN_RANK_HEADING.search(text)
+    if heading is not None:
+        return heading.start()
+    for match in _RETURN_RANK_LOOSE.finditer(text):
+        if not _instruction_mention(text, match.start()):
+            return match.start()
+    return None
+
+
+def split_answer_lists(text: str) -> tuple[tuple[str, str], ...]:
+    """Split one answer into ``watch`` and, when labeled, ``return_7d``.
+
+    The v2 prompt puts the watch list first and the label "7-day return rank"
+    on the second list. Text before that label is ``watch``. The label and
+    the text after it are ``return_7d``. An answer with no label, including
+    every v1 log, is a single ``watch`` section.
+    """
+    start = _return_rank_start(text)
+    if start is None:
+        return (("watch", text),)
+    return (("watch", text[:start]), ("return_7d", text[start:]))
+
+
+def extract_answer_mentions(text: str, coins: tuple[Coin, ...] | None = None) -> Extraction:
+    """Extract mentions from one answer, one row per coin per list.
+
+    The two numbered lists are parsed separately so a coin can be rank 1 on
+    the watch list and a different rank on the 7-day return list. Those rows
+    do not collapse into a rank conflict.
+    """
+    mentions: list[Mention] = []
+    unresolved: list[str] = []
+    for list_type, section in split_answer_lists(text):
+        extraction = extract_mentions(section, coins)
+        for mention in extraction.mentions:
+            mentions.append(replace(mention, list_type=list_type))
+        for symbol in extraction.unresolved_symbols:
+            if symbol not in unresolved:
+                unresolved.append(symbol)
+    mentions.sort(
+        key=lambda item: (
+            0 if item.list_type == "watch" else 1,
+            item.rank is None,
+            item.rank or 0,
+            item.symbol,
+        )
+    )
+    return Extraction(mentions=tuple(mentions), unresolved_symbols=tuple(unresolved))
 
 
 def extract_mentions(text: str, coins: tuple[Coin, ...] | None = None) -> Extraction:

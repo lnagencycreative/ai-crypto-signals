@@ -17,7 +17,7 @@ from typing import Any
 import yaml
 
 from ai_crypto_signals.config import PROMPT_ID, data_paths, provider_by_alias
-from ai_crypto_signals.parsing.mentions import Extraction, extract_mentions
+from ai_crypto_signals.parsing.mentions import Extraction, extract_answer_mentions
 
 _FRONT_MATTER = re.compile(r"\A---\s*\r?\n(.*?)\r?\n---\s*\r?\n?(.*)\Z", re.DOTALL)
 
@@ -82,8 +82,8 @@ def iter_manual_paths(root: Path | None = None) -> list[Path]:
 
 def _extraction_for(status: str, text: str) -> Extraction:
     if status != "ok":
-        return extract_mentions("")
-    return extract_mentions(text)
+        return extract_answer_mentions("")
+    return extract_answer_mentions(text)
 
 
 def parse_manual_text(text: str, *, response_id: str, path: str = "") -> ManualResponse:
