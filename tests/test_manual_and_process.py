@@ -33,6 +33,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-27_gemini.md",
         "2026-10-27_claude.md",
         "2026-10-27_grok.md",
+        "2026-10-28_chatgpt.md",
+        "2026-10-28_gemini.md",
+        "2026-10-28_claude.md",
+        "2026-10-28_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -46,6 +50,7 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-25_grok.md",
         "2026-10-26_claude.md",
         "2026-10-27_claude.md",
+        "2026-10-28_claude.md",
     ):
         skipped = responses[name]
         assert skipped.status == "skipped"
@@ -200,6 +205,28 @@ def test_manual_files_parse_and_examples_are_ignored():
     assert responses["2026-10-27_grok.md"].skip_reason == "sign-up wall"
     assert responses["2026-10-27_grok.md"].model == "Fast"
     assert responses["2026-10-27_grok.md"].collected_at == "2026-10-27T13:06:00Z"
+
+    assert responses["2026-10-28_chatgpt.md"].skip_reason == "guest page reset with no answer"
+    assert responses["2026-10-28_chatgpt.md"].collected_at == "2026-10-28T13:05:00Z"
+    assert responses["2026-10-28_grok.md"].skip_reason == "sign-up wall"
+    assert responses["2026-10-28_grok.md"].model == "Fast"
+    assert responses["2026-10-28_grok.md"].collected_at == "2026-10-28T13:06:00Z"
+
+    gemini_28 = responses["2026-10-28_gemini.md"]
+    assert gemini_28.status == "ok"
+    assert gemini_28.model == ""
+    assert gemini_28.transcript_fidelity == "verbatim"
+    assert gemini_28.collected_at == "2026-10-28T13:06:00Z"
+    assert gemini_28.text.startswith("Bitcoin (BTC)")
+    assert "Zcash (ZEC)" in gemini_28.text
+    assert gemini_28.text.endswith("whether recent momentum is persistent or short-lived.")
+    assert [(mention.rank, mention.symbol) for mention in gemini_28.extraction.mentions] == [
+        (None, "BTC"),
+        (None, "ETH"),
+        (None, "SOL"),
+        (None, "XRP"),
+        (None, "ZEC"),
+    ]
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):
