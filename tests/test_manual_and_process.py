@@ -41,6 +41,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-10-29_gemini.md",
         "2026-10-29_claude.md",
         "2026-10-29_grok.md",
+        "2026-10-30_chatgpt.md",
+        "2026-10-30_gemini.md",
+        "2026-10-30_claude.md",
+        "2026-10-30_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -288,6 +292,64 @@ def test_manual_files_parse_and_examples_are_ignored():
         (4, "XRP"),
         (5, "SOL"),
         (None, "ETH"),
+    ]
+
+    chatgpt_30 = responses["2026-10-30_chatgpt.md"]
+    assert chatgpt_30.status == "ok"
+    assert chatgpt_30.model == "Instant"
+    assert chatgpt_30.prompt_id == "weekly_watch_v1"
+    assert chatgpt_30.transcript_fidelity == "reformatted"
+    assert chatgpt_30.collected_at == "2026-10-30T13:11:00Z"
+    assert chatgpt_30.text.startswith("Top 5 cryptocurrencies to watch this week")
+    assert chatgpt_30.text.endswith("depending on your goal.")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_30.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "HYPE"),
+        (4, "SOL"),
+        (5, "XRP"),
+    ]
+
+    claude_30 = responses["2026-10-30_claude.md"]
+    assert claude_30.status == "skipped"
+    assert claude_30.skip_reason == "organization disabled"
+    assert claude_30.prompt_id == "weekly_watch_v1"
+    assert claude_30.transcript_fidelity == "not_collected"
+    assert claude_30.collected_at == "2026-10-30T13:14:00Z"
+    assert claude_30.extraction.mentions == ()
+    assert claude_30.text == "No answer was collected."
+
+    gemini_30 = responses["2026-10-30_gemini.md"]
+    assert gemini_30.status == "ok"
+    assert gemini_30.model == "Gemini Auto"
+    assert gemini_30.prompt_id == "weekly_watch_v1"
+    assert gemini_30.transcript_fidelity == "reformatted"
+    assert gemini_30.collected_at == "2026-10-30T13:16:00Z"
+    assert gemini_30.text.startswith("Here is a ranked list of five cryptocurrencies to watch this week")
+    assert "5. Zcash (ZEC)" in gemini_30.text
+    assert gemini_30.text.endswith("or an overview of broader altcoin market conditions?")
+    assert [(mention.rank, mention.symbol) for mention in gemini_30.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "XRP"),
+        (3, "ETH"),
+        (4, "HYPE"),
+        (5, "ZEC"),
+    ]
+
+    grok_30 = responses["2026-10-30_grok.md"]
+    assert grok_30.status == "ok"
+    assert grok_30.model == "Fast"
+    assert grok_30.prompt_id == "weekly_watch_v1"
+    assert grok_30.transcript_fidelity == "reformatted"
+    assert grok_30.collected_at == "2026-10-30T13:19:00Z"
+    assert grok_30.text.startswith("1. Hyperliquid (HYPE)")
+    assert grok_30.text.endswith("cross-check live data.")
+    assert [(mention.rank, mention.symbol) for mention in grok_30.extraction.mentions] == [
+        (1, "HYPE"),
+        (2, "ZEC"),
+        (3, "BTC"),
+        (4, "SOL"),
+        (5, "ETH"),
     ]
 
 
