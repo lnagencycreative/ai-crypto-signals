@@ -109,3 +109,19 @@ manual:2026-11-01_grok,2026-11-01T14:12:00Z,xai,Grok,manual_chat,zcash,ZEC,Zcash
 manual:2026-11-01_grok,2026-11-01T14:12:00Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-01_grok,2026-11-01T14:12:00Z,xai,Grok,manual_chat,ripple,XRP,XRP,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-01_grok,2026-11-01T14:12:00Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,,,False,,unspecified,,,ticker,True
+manual:2026-11-02_chatgpt,2026-11-02T14:04:00Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,Top overall,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_chatgpt,2026-11-02T14:04:00Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_chatgpt,2026-11-02T14:04:00Z,openai,ChatGPT,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,Momentum watch,positive,momentum,,name|rank|ticker,True
+manual:2026-11-02_chatgpt,2026-11-02T14:04:00Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_chatgpt,2026-11-02T14:04:00Z,openai,ChatGPT,manual_chat,zcash,ZEC,Zcash,watch,5.0,inline,True,High risk,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_gemini,2026-11-02T14:05:47Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_gemini,2026-11-02T14:05:47Z,google,Gemini,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_gemini,2026-11-02T14:05:47Z,google,Gemini,manual_chat,ripple,XRP,XRP,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_gemini,2026-11-02T14:05:47Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_gemini,2026-11-02T14:05:47Z,google,Gemini,manual_chat,zcash,ZEC,Zcash,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,ripple,XRP,XRP,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,,,False,,unspecified,,,ticker,True

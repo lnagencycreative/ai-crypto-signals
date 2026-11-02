@@ -982,3 +982,129 @@ Context notes: The market entered the week under pressure from the Binance incid
 Always do your own research, size positions carefully, and treat crypto as high-risk. Conditions can shift quickly with news, flows, or macro data.
 
 45 sources"
+manual:2026-11-02_chatgpt,2026-11-02T14:04:00Z,timestamp,openai,ChatGPT,Instant,ok,,manual_chat,weekly_watch_v1,reformatted,"Logged in as Lael (ChatGPT Plus). Model label shown: Instant. New chat at https://chatgpt.com/c/6ae89883-9090-83e9-91bf-32bce34fbb06. ChatGPT ran a web search (sources shown as KuCoin, Coinbell and others; no counts). Body is the answer text transcribed from the page; citations kept as short bracketed source names and tables reformatted as plain lines.",,"Top 5 Cryptocurrencies to Watch This Week
+
+November 2–8, 2026 | Ranked by opportunity, catalysts, momentum, and risk
+
+My top pick this week is Bitcoin (BTC) for its potential recovery setup. For higher-risk upside, I'm watching Hyperliquid (HYPE) and Zcash (ZEC) because both have significant events approaching.
+
+The broader market remains fragile following October's selloff, institutional fund outflows, and a major exchange security incident. That makes confirmation of price momentum especially important. [KuCoin +1]
+
+My ranked watchlist
+
+1. Bitcoin (BTC) — Top overall
+~$78,278
+7-day performance: −2.63%
+The market's primary direction setter. Watch for a sustained breakout above $80,000, particularly if ETF flows improve. A move below approximately $76,000 would weaken the recovery case.
+Risk: Macro volatility and institutional selling.
+
+2. Ethereum (ETH)
+~$2,274
+7-day performance: −2.83%
+A potential rebound candidate after substantial weakness. Watch ETH's performance relative to BTC, institutional ETF flows, and updates on the Glamsterdam upgrade.
+Risk: Continued fund outflows and delayed upgrade milestones.
+
+3. Hyperliquid (HYPE) — Momentum watch
+~$87.82
+Recent reported 7-day performance: +15.2%
+Strong relative momentum makes HYPE particularly interesting. Its planned November 6 team-token distribution could create significant volatility.
+Risk: Token supply pressure and a sharp reversal after recent gains.
+
+4. XRP
+~$1.25
+7-day performance: −3.73%
+XRP has a potential November 4 ledger amendment catalyst. Recent reports of positive XRP ETF inflows despite outflows from other major crypto funds also make it worth monitoring.
+Risk: Weak momentum, escrow-related supply, and support around $1.20.
+
+5. Zcash (ZEC) — High risk
+~$1,239
+Recent reported 7-day performance: +3.2%
+Its NU7 network upgrade is scheduled for approximately November 5, creating a clear event-driven trading setup. Watch whether momentum continues after the upgrade.
+Risk: Upgrade execution, extreme volatility, and selling after the event.
+
+Indicative prices and reported returns from November 1–2 market coverage, not live executable quotes. HYPE and ZEC figures come from a different reporting snapshot than the major-coin prices. [Coinbell +2]
+
+This week's key catalysts
+Nov 3 | Expected Binance proof-of-reserves update | BTC, ETH, broader market
+Nov 4 | Expected XRP Ledger amendment | XRP
+Nov 5 | Scheduled NU7 network upgrade | ZEC
+Nov 6 | Planned team-token distribution | HYPE
+All week | U.S. midterm election and macroeconomic volatility | BTC, ETH, all altcoins
+[KuCoin +1]
+
+How I would prioritize them
+Best overall watch: BTC
+Best potential rebound: ETH
+Strongest relative momentum: HYPE
+Event-driven speculation: ZEC
+Regulatory/institutional interest watch: XRP
+
+My outlook: I favor monitoring BTC and ETH for confirmation of a broader recovery before taking aggressive altcoin exposure. HYPE and ZEC offer potentially larger short-term moves, but their event risks can cut both ways. This is a ranked watchlist, not a recommendation to buy all five.
+
+Would you like me to rank these same five by which has the greatest potential to gain 10–20% this week, including bullish and bearish price targets?
+[Suggested follow-ups: ""Show 7-day price targets and probabilities"", ""Rank by highest short-term upside""]"
+manual:2026-11-02_claude,2026-11-02T14:05:00Z,timestamp,anthropic,Claude,,skipped,organization disabled,manual_chat,weekly_watch_v1,not_collected,"Skipped. Logged in as Lael (Free plan), but claude.ai/new showed ""Organization disabled - This organization has been disabled. If you think this is an error, you can request a review."" with no chat input, so the prompt could not be submitted. No review was requested, so there is no answer.",,No answer was collected.
+manual:2026-11-02_gemini,2026-11-02T14:05:47Z,timestamp,google,Gemini,Gemini Auto,ok,,manual_chat,weekly_watch_v1,reformatted,Logged in as Lael (no plan label visible). Mode picker showed Auto. New chat at https://gemini.google.com/app/be4ce13600342a79. Sources cited as KuCoin; no counts shown. Body is the answer text transcribed from the page; citations kept as short bracketed source names and tables reformatted as plain lines.,,"Here are the top 5 cryptocurrencies to keep on your radar this week, ranked by structural strength, fundamental catalysts, and risk profile:
+
+1. Bitcoin (BTC)
+Category: Market Benchmark / Store of Value
+Why Watch:
+Macro Anchor: During recent market pullbacks, BTC demonstrated strong relative stability, holding over ~60% market dominance.
+Institutional Inflows: Sustained ETF allocations continue to keep liquidity baseline high relative to altcoins.
+What to Look For: Key technical support levels around $78,000–$80,000 and institutional ETF net inflow reports.
+
+2. Hyperliquid (HYPE)
+Category: Layer-1 / Perpetual DEX
+Why Watch:
+Outperforming Momentum: HYPE was one of the few top-cap digital assets to post a positive 30-day gain (+5.7%) while broader market indices trended downward. [KuCoin]
+Institutional Expansion: Intercontinental Exchange (ICE) backed initiatives involving trade[XYZ] to build a regulated U.S. perpetual futures market powered by the Hyperliquid blockchain, driving strong narrative momentum. [KuCoin]
+What to Look For: How price consolidates following its 90-day surge (+72%) and news around regulatory filing milestones. [KuCoin]
+
+3. Ripple (XRP)
+Category: Cross-Border Payments / Enterprise
+Why Watch:
+Regulatory & Institutional News Gap: Major structural catalysts recently materialized, including OCC approval for Ripple National Trust Bank and BNY custody integration for XRP and RLUSD. [KuCoin]
+Asymmetric Re-pricing Potential: Despite fundamental progress, the token experienced a short-term pullback (~17% over 30 days). A catch-up rally remains a key catalyst if broad market sentiment stabilizes.
+What to Look For: Rebound activity off the $1.20–$1.25 support zone as institutional sentiment builds.
+
+4. Ethereum (ETH)
+Category: Smart Contract Platform / Layer-1 Benchmark
+Why Watch:
+Valuation Compression / Oversold Dip: ETH has underperformed relative to BTC recently (ETH/BTC ratio hovering near low multi-month bounds), dropping ~17% over the last 30 days. [KuCoin]
+Ecosystem Scale: Spot ETF backing, strong layer-2 rollup activity, and long-term ecosystem TVL position ETH as a top bounce candidate if the broader market reverses upward. [KuCoin]
+What to Look For: Stabilization around the $2,200–$2,300 structural demand block and ETH/BTC ratio momentum.
+
+5. Zcash (ZEC)
+Category: Privacy / Protocol Upgrade
+Why Watch:
+Network Upgrade Catalyst: Zcash enters a major protocol update window with the NU7 upgrade expected at block height 3,543,405.
+Volatility Setup: Event-driven updates often lead to pre-upgrade accumulation and heightened trading volume.
+What to Look For: On-chain transaction volume growth and price action leading directly into the upgrade activation.
+
+Summary Overview
+Rank | Asset | Primary Catalyst / Focus | Key Risk Factor
+1 | Bitcoin (BTC) | Market dominance & ETF stability | Macro interest rate headwinds
+2 | Hyperliquid (HYPE) | Strong relative momentum & ICE partnership news | Short-term profit taking after multi-month run
+3 | XRP | OCC trust bank approval & BNY custody support | Lagging chart price action despite strong news
+4 | Ethereum (ETH) | Deep valuation discount relative to historical BTC pairing | Extended trend underperformance against BTC
+5 | Zcash (ZEC) | Imminent NU7 network upgrade activation | Post-event ""sell the news"" volatility"
+manual:2026-11-02_grok,2026-11-02T14:07:00Z,timestamp,xai,Grok,Fast,ok,,manual_chat,weekly_watch_v1,reformatted,"Logged in as Lael Nowlin (Premium upgrade prompt shown, no plan label). Model label shown: Fast. New chat at https://grok.com/c/c4155597-1412-46ed-b861-3350608861ea. Grok showed 45 sources. Body is the answer text transcribed from the page; citations kept as short bracketed source names and bold markup removed.",,"1. Hyperliquid (HYPE), 2. Zcash (ZEC), 3. Bitcoin (BTC), 4. Solana (SOL), 5. XRP.
+
+These stand out for this week (starting ~November 2, 2026) due to near-term catalysts, relative strength amid a cautious market (BTC near $78k after a weak October and the large Binance hack fallout), institutional/regulatory angles, and event-driven potential. The broader market shows mixed sentiment (Fear & Greed around the mid-30s), ETF flows under pressure, and focus on US midterms (Nov 3), jobs data, and specific protocol events. This is not financial advice—crypto is highly volatile; do your own research and manage risk. [Blockchainreporter +1]
+
+1. Hyperliquid (HYPE)
+Recent relative strength (one of the stronger large-cap performers recently, with gains in the teens percentage-wise over the prior week while many peers lagged) plus concrete catalysts. Key drivers include growing institutional interest, a notable partnership angle involving Intercontinental Exchange (NYSE parent) tied to regulated perpetual futures infrastructure, and a planned team token distribution around November 6. It has stood out for momentum and liquidity in a risk-off environment. Watch for follow-through on the partnership narrative and any supply-related reactions. [Kucoin +1]
+
+2. Zcash (ZEC)
+Privacy-focused network with a scheduled NU7 network upgrade around November 5 (targeted near a specific block height). It has shown notable trading volume and has been highlighted in several near-term watchlists for the hard-fork/execution risk-reward. Privacy narratives can see renewed attention in uncertain macro/regulatory periods. Monitor upgrade execution, any related developer or community updates, and price reaction around the event. [Blockchainreporter]
+
+3. Bitcoin (BTC)
+The market benchmark (~$77k–$78k range recently). It remains the primary vehicle for macro and institutional flows. This week's calendar is dense: US midterm elections (Nov 3), related political/regulatory implications, Apple/Palantir earnings, and the October jobs report. Spot ETF flows have been volatile (including notable recent outflows), while corporate buyers (e.g., Strategy/MicroStrategy activity) continue. BTC's ability to hold key moving averages or reclaim higher levels will heavily influence broader market direction and risk appetite for alts. [Cryptobriefing +1]
+
+4. Solana (SOL)
+High-activity L1 still under pressure from ETF outflows and a multi-week losing streak in some reports, trading around the mid-$90s. Near-term focus includes network performance, ecosystem developments, and the upcoming Breakpoint conference (London, mid-November). It often sees volatility around conferences and on-chain activity spikes. Watch for any positive network or developer signals that could reverse recent weakness relative to BTC. [Blockchainreporter +1]
+
+5. XRP
+Ongoing regulatory and institutional progress (including trust bank approvals and custody developments in prior periods) keeps it on watchlists. There is a potential XRP Ledger amendment (fixCleanup3_4_0) expected around early November, plus sensitivity to broader legal/regulatory headlines and payment-volume data. It has held relatively better in some recent periods amid the broader correction and remains liquid. Monitor escrow dynamics, any amendment outcomes, and correlation with BTC/ETH moves. [Blockchainreporter]
+
+Context notes: Quant (QNT) and others posted strong weekly gains in some reports, and tokens like NEAR have governance votes, but the ranking prioritizes liquidity, clear near-term events, and institutional relevance over pure short-term percentage movers (many of which are smaller or meme-driven). Market recovery from the Binance incident and midterm outcomes could shift momentum quickly. Always cross-check live prices, on-chain data, and official project channels."
