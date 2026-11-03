@@ -125,3 +125,23 @@ manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,bitcoin,BTC,Bit
 manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,ripple,XRP,XRP,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-02_grok,2026-11-02T14:07:00Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,,,False,,unspecified,,,ticker,True
+manual:2026-11-03_chatgpt,2026-11-03T14:15:00Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,Best overall watch,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_chatgpt,2026-11-03T14:15:00Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,Best large-cap rebound candidate,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_chatgpt,2026-11-03T14:15:00Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,watch,3.0,inline,True,Best high-volatility opportunity,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_chatgpt,2026-11-03T14:15:00Z,openai,ChatGPT,manual_chat,chainlink,LINK,Chainlink,watch,4.0,inline,True,Best tokenization theme,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_chatgpt,2026-11-03T14:15:00Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,watch,5.0,inline,True,Best event-driven speculative watch,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_gemini,2026-11-03T14:17:00Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-03_gemini,2026-11-03T14:17:00Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-03_gemini,2026-11-03T14:17:00Z,google,Gemini,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-03_gemini,2026-11-03T14:17:00Z,google,Gemini,manual_chat,ripple,XRP,XRP,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-03_gemini,2026-11-03T14:17:00Z,google,Gemini,manual_chat,zcash,ZEC,Zcash,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,pepe,PEPE,Pepe,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,False
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,blockstack,STX,Stacks,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,False
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,avalanche-2,AVAX,Avalanche,watch,,,False,,unspecified,,,name,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,,,False,,unspecified,,,name,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,chainlink,LINK,Chainlink,watch,,,False,,unspecified,,,name,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,,,False,,unspecified,,,name,True
+manual:2026-11-03_grok,2026-11-03T14:18:20Z,xai,Grok,manual_chat,ripple,XRP,XRP,watch,,,False,,unspecified,,,name|ticker,True

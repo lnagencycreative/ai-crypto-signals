@@ -19,9 +19,15 @@ from dataclasses import dataclass, replace
 from ai_crypto_signals.config import COINS, Coin
 
 # Ranks the prompt asks for five names. Slots past 10 are ignored so dates
-# and prices are less likely to look like a ranking.
+# and prices are less likely to look like a ranking. A day-of-month after a
+# month name ("November 4 XRP") is also a date, not a rank slot.
 _RANK_TOKEN = re.compile(
     r"(?:^|[\s,;:])#?(?P<rank>10|[1-9])\s*[.)\-:]?\s+\$?(?P<token>[A-Za-z][A-Za-z0-9]{1,24})\b"
+)
+_MONTH_BEFORE_RANK = re.compile(
+    r"(?i)(?:January|February|March|April|May|June|July|August|September|"
+    r"October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Sep|Oct|"
+    r"Nov|Dec)\.?\s*$"
 )
 _NUMBERED_LINE = re.compile(
     r"(?m)^\s*#?\s*(?P<rank>10|[1-9])\s*[.)\-:]\s+(?P<body>.+?)\s*$"
@@ -290,6 +296,8 @@ def extract_mentions(text: str, coins: tuple[Coin, ...] | None = None) -> Extrac
             ranks[coin.coingecko_id] = (0, "conflict")
 
     for match in _RANK_TOKEN.finditer(text):
+        if _MONTH_BEFORE_RANK.search(text[max(0, match.start("rank") - 20) : match.start("rank")]):
+            continue
         rank = int(match.group("rank"))
         token = match.group("token")
         coin = _resolve_token(token, ticker_index, catalog)

@@ -57,6 +57,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-02_gemini.md",
         "2026-11-02_claude.md",
         "2026-11-02_grok.md",
+        "2026-11-03_chatgpt.md",
+        "2026-11-03_gemini.md",
+        "2026-11-03_claude.md",
+        "2026-11-03_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -543,6 +547,75 @@ def test_manual_files_parse_and_examples_are_ignored():
         (4, "SOL"),
         (5, "XRP"),
         (None, "ETH"),
+    ]
+
+    chatgpt_1103 = responses["2026-11-03_chatgpt.md"]
+    assert chatgpt_1103.status == "ok"
+    assert chatgpt_1103.model == "Instant"
+    assert chatgpt_1103.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1103.transcript_fidelity == "reformatted"
+    assert chatgpt_1103.collected_at == "2026-11-03T14:15:00Z"
+    assert chatgpt_1103.text.startswith("Top 5 cryptocurrencies to watch this week")
+    assert chatgpt_1103.text.endswith('Rank these five by highest short-term upside"]')
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1103.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "XRP"),
+    ]
+
+    claude_1103 = responses["2026-11-03_claude.md"]
+    assert claude_1103.status == "skipped"
+    assert claude_1103.skip_reason == "organization disabled"
+    assert claude_1103.prompt_id == "weekly_watch_v1"
+    assert claude_1103.transcript_fidelity == "not_collected"
+    assert claude_1103.collected_at == "2026-11-03T14:15:36Z"
+    assert claude_1103.extraction.mentions == ()
+    assert claude_1103.text == "No answer was collected."
+
+    gemini_1103 = responses["2026-11-03_gemini.md"]
+    assert gemini_1103.status == "ok"
+    assert gemini_1103.model == "Gemini Auto"
+    assert gemini_1103.prompt_id == "weekly_watch_v1"
+    assert gemini_1103.transcript_fidelity == "reformatted"
+    assert gemini_1103.collected_at == "2026-11-03T14:17:00Z"
+    assert gemini_1103.text.startswith(
+        "Here is the ranked watchlist of 5 top cryptocurrencies to monitor this week"
+    )
+    assert "Bitcoin (BTC)\n" in gemini_1103.text
+    assert "Zcash (ZEC)\n" in gemini_1103.text
+    assert gemini_1103.text.endswith("not financial or investment advice.")
+    # Headings are unnumbered. Symbol order matches the heading order, so the
+    # ranks stay unset rather than being written into the answer.
+    assert [(mention.rank, mention.symbol) for mention in gemini_1103.extraction.mentions] == [
+        (None, "BTC"),
+        (None, "ETH"),
+        (None, "HYPE"),
+        (None, "XRP"),
+        (None, "ZEC"),
+    ]
+
+    grok_1103 = responses["2026-11-03_grok.md"]
+    assert grok_1103.status == "ok"
+    assert grok_1103.model == "Fast"
+    assert grok_1103.prompt_id == "weekly_watch_v1"
+    assert grok_1103.transcript_fidelity == "reformatted"
+    assert grok_1103.collected_at == "2026-11-03T14:18:20Z"
+    assert "High Demand" in grok_1103.time_note
+    assert grok_1103.text.startswith("Bitcoin (BTC), Hyperliquid (HYPE), Zcash (ZEC)")
+    assert grok_1103.text.endswith("What about the top 10]")
+    assert [(mention.rank, mention.symbol) for mention in grok_1103.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "HYPE"),
+        (3, "ZEC"),
+        (4, "PEPE"),
+        (5, "STX"),
+        (None, "AVAX"),
+        (None, "ETH"),
+        (None, "LINK"),
+        (None, "SOL"),
+        (None, "XRP"),
     ]
 
 

@@ -147,6 +147,18 @@ def test_answer_without_the_return_label_is_all_watch():
     assert [mention.rank for mention in extraction.mentions] == [1, 2, 3, 4, 5]
 
 
+def test_month_day_does_not_override_a_numbered_rank():
+    text = (
+        "1. Bitcoin (BTC) — benchmark\n"
+        "5. XRP — payments\n"
+        "Watch: The November 4 XRP Ledger amendment.\n"
+    )
+    mentions, _ = _by_symbol(text)
+    assert mentions["BTC"].rank == 1
+    assert mentions["XRP"].rank == 5
+    assert mentions["XRP"].rank_source != "conflict"
+
+
 def test_sentiment_lexicon_reads_the_rationale_only():
     text = "1. Dogecoin (DOGE) — bearish after the dump, despite broader momentum elsewhere."
     mentions, _ = _by_symbol(text)
