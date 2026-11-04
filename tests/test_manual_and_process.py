@@ -61,6 +61,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-03_gemini.md",
         "2026-11-03_claude.md",
         "2026-11-03_grok.md",
+        "2026-11-04_chatgpt.md",
+        "2026-11-04_gemini.md",
+        "2026-11-04_claude.md",
+        "2026-11-04_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -616,6 +620,67 @@ def test_manual_files_parse_and_examples_are_ignored():
         (None, "LINK"),
         (None, "SOL"),
         (None, "XRP"),
+    ]
+
+    chatgpt_1104 = responses["2026-11-04_chatgpt.md"]
+    assert chatgpt_1104.status == "ok"
+    assert chatgpt_1104.model == "Instant"
+    assert chatgpt_1104.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1104.transcript_fidelity == "reformatted"
+    assert chatgpt_1104.collected_at == "2026-11-04T14:14:30Z"
+    assert chatgpt_1104.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1104.text.endswith("ChatGPT can make mistakes. Check important info.")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1104.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "HYPE"),
+        (3, "ETH"),
+        (4, "XRP"),
+        (5, "ZEC"),
+        (None, "SOL"),
+    ]
+
+    claude_1104 = responses["2026-11-04_claude.md"]
+    assert claude_1104.status == "skipped"
+    assert claude_1104.skip_reason == "organization disabled"
+    assert claude_1104.prompt_id == "weekly_watch_v1"
+    assert claude_1104.transcript_fidelity == "not_collected"
+    assert claude_1104.collected_at == "2026-11-04T14:17:00Z"
+    assert claude_1104.extraction.mentions == ()
+    assert claude_1104.text == "No answer was collected."
+
+    gemini_1104 = responses["2026-11-04_gemini.md"]
+    assert gemini_1104.status == "ok"
+    assert gemini_1104.model == "Gemini Auto"
+    assert gemini_1104.prompt_id == "weekly_watch_v1"
+    assert gemini_1104.transcript_fidelity == "reformatted"
+    assert gemini_1104.collected_at == "2026-11-04T14:15:12Z"
+    assert gemini_1104.text.startswith(
+        "Here are 5 cryptocurrencies to watch this week, ranked by market position"
+    )
+    assert "5 | Hyperliquid (HYPE)" in gemini_1104.text
+    assert gemini_1104.text.endswith("Gemini is AI and can make mistakes.")
+    assert [(mention.rank, mention.symbol) for mention in gemini_1104.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "XRP"),
+        (4, "SOL"),
+        (5, "HYPE"),
+    ]
+
+    grok_1104 = responses["2026-11-04_grok.md"]
+    assert grok_1104.status == "ok"
+    assert grok_1104.model == "Fast"
+    assert grok_1104.prompt_id == "weekly_watch_v1"
+    assert grok_1104.transcript_fidelity == "reformatted"
+    assert grok_1104.collected_at == "2026-11-04T14:15:45Z"
+    assert grok_1104.text.startswith("1. Bitcoin (BTC)")
+    assert grok_1104.text.endswith("45 sources")
+    assert [(mention.rank, mention.symbol) for mention in grok_1104.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ZEC"),
+        (3, "HYPE"),
+        (4, "SOL"),
+        (5, "ETH"),
     ]
 
 
