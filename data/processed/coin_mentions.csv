@@ -161,3 +161,20 @@ manual:2026-11-04_grok,2026-11-04T14:15:45Z,xai,Grok,manual_chat,zcash,ZEC,Zcash
 manual:2026-11-04_grok,2026-11-04T14:15:45Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-04_grok,2026-11-04T14:15:45Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-04_grok,2026-11-04T14:15:45Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_chatgpt,2026-11-05T14:11:35Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,Best overall watch,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_chatgpt,2026-11-05T14:11:35Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,Best large-cap altcoin opportunity,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_chatgpt,2026-11-05T14:11:35Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,watch,3.0,inline,True,Best aggressive rebound candidate,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_chatgpt,2026-11-05T14:11:35Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,watch,4.0,inline,True,Best institutional-flow watch,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_chatgpt,2026-11-05T14:11:35Z,openai,ChatGPT,manual_chat,binancecoin,BNB,BNB,watch,5.0,inline,True,Best ecosystem recovery watch,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_gemini,2026-11-05T14:12:45Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,Macro Anchor & Institutional Shield,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_gemini,2026-11-05T14:12:45Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,Deep Discount & ETH/BTC Ratio Test,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_gemini,2026-11-05T14:12:45Z,google,Gemini,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,Relative Strength & Ecosystem Expansion,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_gemini,2026-11-05T14:12:45Z,google,Gemini,manual_chat,ripple,XRP,XRP,watch,4.0,inline,True,Regulatory & Custodial Catalyst Watch,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_gemini,2026-11-05T14:12:45Z,google,Gemini,manual_chat,solana,SOL,Solana,watch,5.0,inline,True,High-Beta Layer-1 Benchmark,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,chainlink,LINK,Chainlink,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-05_grok,2026-11-05T14:13:18Z,xai,Grok,manual_chat,blockstack,STX,Stacks,watch,,,False,,unspecified,,,name|ticker,False

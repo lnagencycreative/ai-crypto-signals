@@ -65,6 +65,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-04_gemini.md",
         "2026-11-04_claude.md",
         "2026-11-04_grok.md",
+        "2026-11-05_chatgpt.md",
+        "2026-11-05_gemini.md",
+        "2026-11-05_claude.md",
+        "2026-11-05_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -681,6 +685,70 @@ def test_manual_files_parse_and_examples_are_ignored():
         (3, "HYPE"),
         (4, "SOL"),
         (5, "ETH"),
+    ]
+
+    chatgpt_1105 = responses["2026-11-05_chatgpt.md"]
+    assert chatgpt_1105.status == "ok"
+    assert chatgpt_1105.model == "Instant"
+    assert chatgpt_1105.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1105.transcript_fidelity == "reformatted"
+    assert chatgpt_1105.collected_at == "2026-11-05T14:11:35Z"
+    assert chatgpt_1105.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1105.text.endswith("including bullish targets, downside levels, and entry zones?")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1105.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "XRP"),
+        (5, "BNB"),
+    ]
+
+    claude_1105 = responses["2026-11-05_claude.md"]
+    assert claude_1105.status == "skipped"
+    assert claude_1105.skip_reason == "organization disabled"
+    assert claude_1105.prompt_id == "weekly_watch_v1"
+    assert claude_1105.transcript_fidelity == "not_collected"
+    assert claude_1105.collected_at == "2026-11-05T14:12:00Z"
+    assert claude_1105.extraction.mentions == ()
+    assert claude_1105.text == "No answer was collected."
+
+    gemini_1105 = responses["2026-11-05_gemini.md"]
+    assert gemini_1105.status == "ok"
+    assert gemini_1105.model == "Gemini Auto"
+    assert gemini_1105.prompt_id == "weekly_watch_v1"
+    assert gemini_1105.transcript_fidelity == "reformatted"
+    assert gemini_1105.collected_at == "2026-11-05T14:12:45Z"
+    assert gemini_1105.text.startswith(
+        "The top 5 cryptocurrencies to watch this week balance macroeconomic resilience"
+    )
+    assert "3. Hyperliquid (HYPE)" in gemini_1105.text
+    assert gemini_1105.text.endswith("not direct financial advice.")
+    assert [(mention.rank, mention.symbol) for mention in gemini_1105.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "HYPE"),
+        (4, "XRP"),
+        (5, "SOL"),
+    ]
+
+    grok_1105 = responses["2026-11-05_grok.md"]
+    assert grok_1105.status == "ok"
+    assert grok_1105.model == "Fast"
+    assert grok_1105.prompt_id == "weekly_watch_v1"
+    assert grok_1105.transcript_fidelity == "reformatted"
+    assert grok_1105.collected_at == "2026-11-05T14:13:18Z"
+    assert grok_1105.text.startswith("1. Zcash (ZEC)")
+    assert grok_1105.text.endswith("45 sources")
+    # LINK is named as a close alternative on the Solana line, and Stacks (STX)
+    # is an honorable mention. Neither inherits a rank.
+    assert [(mention.rank, mention.symbol) for mention in grok_1105.extraction.mentions] == [
+        (1, "ZEC"),
+        (2, "BTC"),
+        (3, "HYPE"),
+        (4, "ETH"),
+        (5, "SOL"),
+        (None, "LINK"),
+        (None, "STX"),
     ]
 
 
