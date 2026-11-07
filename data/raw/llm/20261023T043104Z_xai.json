@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "source": "llm_api",
+  "provider": "xai",
+  "provider_label": "Grok",
+  "model": "grok-4.7",
+  "prompt_id": "weekly_watch_v1",
+  "prompt": "Which 5 cryptocurrencies would you recommend watching this week, and why? Rank them.",
+  "collected_at": "2026-10-23T04:31:04Z",
+  "env_var": "XAI_API_KEY",
+  "browsing": false,
+  "status": "skipped",
+  "skip_reason": "missing_api_key",
+  "http_status": null,
+  "response_text": null,
+  "raw_response": null,
+  "error": null
+}
