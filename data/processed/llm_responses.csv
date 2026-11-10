@@ -1910,3 +1910,111 @@ The market is in a risk-off / consolidation phase with Fear readings elevated, h
 
 This is not financial advice—crypto is highly volatile. Prices move fast on news, flows, and sentiment. Do your own research, size positions carefully, and consider the broader risk environment (Fed path, equity/AI volatility spillover). Rankings prioritize catalysts + liquidity for this week rather than"
 manual:2026-11-09_claude,2026-11-09T14:04:30Z,timestamp,anthropic,Claude,,skipped,organization disabled,manual_chat,weekly_watch_v1,not_collected,"Skipped. Logged in as Lael (Free plan), but claude.ai/new showed ""Organization disabled. This organization has been disabled."" with a Request a review button and no usable chat input, so the prompt could not be submitted. No review was requested, so there is no answer.",,No answer was collected.
+manual:2026-11-10_chatgpt,2026-11-10T14:00:58Z,timestamp,openai,ChatGPT,Instant,ok,,manual_chat,weekly_watch_v1,reformatted,"Logged in as Lael (Plus plan shown). UI showed Thinking effort: Instant; no named model label. New chat at https://chatgpt.com/c/6af3239c-2e44-83ea-a03c-8263ff666c9d. UI showed Searching the web, then Searching 12 websites. Waited until the Stop button disappeared and the full answer rendered. Inline source chips (e.g. Gate Blog +3) omitted from transcription.",,"Top 5 Cryptocurrencies to Watch This Week
+
+November 10–15, 2026 | Ranked by opportunity, catalysts, momentum, and risk
+
+My top pick is Bitcoin (BTC) for stability relative to other cryptocurrencies, while Solana (SOL) offers the most interesting event-driven opportunity this week.
+
+The market is currently under selling pressure. Bitcoin fell approximately 4.7% last week, while Ethereum declined 7.2% and Solana dropped 8.8%. This makes confirmation of a recovery particularly important before entering new positions.
+
+My ranked watchlist
+
+1. Bitcoin (BTC). Top overall. Relative risk: Moderate–high.
+Bitcoin remains the market's main directional indicator. Its deeper liquidity makes it my preferred cryptocurrency to monitor during a selloff. Watch ETF flows and whether BTC can reclaim the $79,344 resistance area.
+Key levels: $75,338 support / $79,344 resistance
+
+2. Solana (SOL). Relative risk: High | Best event catalyst.
+Solana's Breakpoint conference begins November 15. Announcements involving payments, tokenization, or institutional adoption could attract attention. However, recent underperformance means positive news may already be priced in.
+Key levels: $85.30 support / $98.50 resistance
+
+3. Ethereum (ETH). Relative risk: High | Recovery candidate.
+Ethereum is worth watching for a rebound in institutional demand and ETF flows. Recent withdrawals and uncertainty around its upgrade schedule are headwinds, but improving relative strength against Bitcoin could be an early recovery signal.
+Key levels: $2,188 support / $2,365 resistance
+
+4. XRP. Relative risk: High | Institutional adoption watch.
+Ripple's reported trust-bank approval and custody developments provide a potential institutional catalyst. But XRP's recent weakness suggests that positive fundamental developments have not yet translated into stronger prices.
+Key levels: $1.1175 support / $1.2630 resistance
+
+5. Hyperliquid (HYPE). Relative risk: Very high | Speculative opportunity.
+Hyperliquid offers exposure to decentralized derivatives trading. Ecosystem development provides a reason to monitor it, but recent weakness and ETF outflows make it the most speculative selection on this list.
+Watch: Trading activity, token performance versus BTC, and institutional flows
+
+This week's biggest market catalysts
+
+| Date | Event | What it could affect |
+|---|---|---|
+| Nov. 10 | U.S. CPI inflation report | BTC, ETH and broader risk appetite |
+| Nov. 13 | U.S. PPI inflation report | Interest-rate expectations |
+| Nov. 15 | Solana Breakpoint begins | SOL and Solana ecosystem tokens |
+
+My strategy for this week
+
+Choose your risk tolerance (the page showed three options):
+- More conservative — prioritize established crypto
+- Balanced — established assets plus growth opportunities
+- Aggressive — higher-volatility trading opportunities
+
+Focus: BTC, SOL and ETH
+
+Use Bitcoin to gauge market direction, Solana for the Breakpoint catalyst, and Ethereum for possible recovery momentum.
+
+Bottom line: I would prioritize BTC first, SOL second, and ETH third this week. The biggest risk is that inflation data or continued institutional selling pushes the entire market lower. The price levels above are published technical reference points, not verified live quotes or guaranteed turning points.
+
+This is a watchlist rather than a recommendation to buy all five immediately.
+
+Sources: November 9–10 market outlooks from Gate, Crypto.com, RoboForex, and crypto ETF flow data."
+manual:2026-11-10_claude,2026-11-10T14:01:00Z,timestamp,anthropic,Claude,,skipped,organization disabled,manual_chat,weekly_watch_v1,not_collected,"Skipped. Logged in as Lael (Free plan) at https://claude.ai/new, sidebar showed her chat history, but the page showed ""Organization disabled — This organization has been disabled. If you think this is an error, you can request a review."" with a Request a review button and no usable chat input. Reference shown: TS-019dae05-c8f5-712f-bc1e-88dd0e03f668. Prompt not sent. Did not request a review.",,No answer was collected.
+manual:2026-11-10_gemini,2026-11-10T14:01:43Z,timestamp,google,Gemini,Auto,ok,,manual_chat,weekly_watch_v1,reformatted,"Logged in as Lael. Model label shown: Gemini Auto. New chat at https://gemini.google.com/app/496db18ce2fbf4b6 (sidebar titled ""Top 5 Cryptos to Watch""). The page offered an Upgrade button. The page redirected to /app after sending, so the chat was reopened from the sidebar to read it. Answer text appeared complete. Inline source chips (e.g. 24/7 Wall St., CryptoTicker) omitted from transcription.",,"Here are 5 top cryptocurrencies to watch right now, ranked by market relevance, institutional flows, and near-term catalysts:
+
+1. Bitcoin (BTC)
+Why watch: Market anchor & ETF flows.
+Context: Bitcoin remains the primary gauge for overall market direction. With macroeconomic headlines and US spot ETF net flows driving recent sentiment, watching how BTC defends its 200-day moving average (~$73k–$75k zone) will dictate broader altcoin momentum.
+
+2. Ethereum (ETH)
+Why watch: Discounted valuation vs. BTC ratio key levels.
+Context: ETH has seen steeper drawdowns relative to Bitcoin recently, bringing the ETH/BTC ratio down near cycle multi-year lows. Analysts are closely tracking whether Layer-2 activity and staking demand can spark a mean-reversion rebound.
+
+3. Solana (SOL)
+Why watch: High-speed L1 leader testing long-term support.
+Context: Solana continues to command major DEX volume and active user metrics, but its spot price has pulled back significantly from highs. Traders are watching if SOL holds key support around its 200-day average (~$89) for potential relief bounces.
+
+4. XRP (XRP)
+Why watch: Institutional adoption vs. chart divergence.
+Context: Following recent regulatory and trust bank setup developments, XRP has shown strong fundamental headlines that have yet to fully translate into price momentum. Watching whether it can reclaim key moving averages (around $1.27) is key.
+
+5. Hyperliquid (HYPE)
+Why watch: On-chain perps momentum & decentralized L1 exchange growth.
+Context: Hyperliquid has stood out as one of the stronger relative performers in recent market rotation, driven by strong protocol revenue and deep perpetual swap volume on its dedicated Layer 1.
+
+Would you like to track specific key support/resistance levels for any of these tokens, or explore recent ETF inflow data in detail?"
+manual:2026-11-10_grok,2026-11-10T14:02:38Z,timestamp,xai,Grok,Fast,ok,,manual_chat,weekly_watch_v1,reformatted,"Logged in as Lael Nowlin. Model label shown: Fast. UI also showed Thought for 14s. New chat at https://grok.com/c/1b708826-add4-43bd-b54d-3c286e02ae98. It was a normal chat, not private mode, with a Get 50% off Premium promo visible. The response showed 45 sources. The Stop button was gone and the response-action toolbar was showing, so generation had finished. Body is the answer text transcribed from the page through the final paragraph.",,"1. Bitcoin (BTC)
+2. Solana (SOL)
+3. Zcash (ZEC)
+4. Hyperliquid (HYPE)
+5. Quant (QNT)
+
+These rankings prioritize near-term catalysts, liquidity, relative momentum, and potential volatility drivers for the week of November 10, 2026 (as of current data). Crypto remains highly volatile and sensitive to macro data; this is not financial advice—always do your own research and manage risk carefully.
+
+### 1. Bitcoin (BTC)
+BTC is the clear market leader and primary driver of overall crypto direction. It trades in the mid-$70,000s amid recent pressure from ETF outflows and risk-off sentiment. The key near-term catalyst is today's U.S. October CPI release (and follow-on PPI/Fed commentary later in the week), which will shape rate expectations for the December Fed meeting. High liquidity, institutional flows, and dominance make it essential to watch for any macro-driven moves that typically cascade to the rest of the market.
+
+### 2. Solana (SOL)
+SOL has underperformed recently but sits in focus due to Solana Breakpoint (starting around November 15 in London). The conference historically brings ecosystem announcements around payments, RWAs, stablecoins, AI, and network performance. High-beta nature means it can move sharply on positive (or disappointing) updates once BTC stabilizes. Ongoing institutional access developments (e.g., brokerage support) add secondary interest.
+
+### 3. Zcash (ZEC)
+Privacy coins have been a notable 2026 theme. ZEC completed its NU7 upgrade (faster block times, improved private payments) around early November and has shown relative resilience with hashrate records and solid year-to-date performance. Post-upgrade monitoring for wallet support, adoption metrics, and any renewed privacy narrative strength (sometimes linked to broader discussions around projects like Midnight) makes it worth tracking for continued momentum or mean-reversion.
+
+### 4. Hyperliquid (HYPE)
+HYPE stands out for strong on-chain perpetual futures volume and protocol revenue in the decentralized trading space. It has demonstrated relative strength at times while the broader market corrected, supported by ongoing ecosystem developments (including related L2 activity). Watch for volume trends, any regulatory or expansion news, and how it holds up as a high-activity DeFi name in a potentially volatile week.
+
+### 5. Quant (QNT)
+QNT has been among the standout weekly performers with very large percentage gains recently, driven by interoperability and enterprise/blockchain connectivity narratives. Momentum names like this can extend or retrace sharply; the combination of recent price action and the overarching tech narrative makes it a higher-risk/higher-watch candidate for short-term moves, especially if risk appetite improves after the CPI print.
+
+### Quick context for the week
+- **Macro dominates early:** CPI today is the biggest scheduled event; softer data could support risk assets, while hotter numbers may pressure them further.
+- **Crypto-native later:** Solana Breakpoint is the main conference catalyst toward the weekend.
+- Broader backdrop includes ongoing ETF flow monitoring, residual privacy interest, and selective alt strength in names with clear catalysts or momentum.
+- Many smaller or meme-style names show extreme weekly percentage moves but carry far higher risk and lower liquidity—generally less suitable as primary ""watch"" recommendations.
+
+Markets can shift quickly on unexpected news or data surprises. Position sizing, stop-losses, and diversification matter more than any single weekly list."

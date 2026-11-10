@@ -85,6 +85,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-09_gemini.md",
         "2026-11-09_claude.md",
         "2026-11-09_grok.md",
+        "2026-11-10_chatgpt.md",
+        "2026-11-10_gemini.md",
+        "2026-11-10_claude.md",
+        "2026-11-10_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1020,6 +1024,72 @@ def test_manual_files_parse_and_examples_are_ignored():
         (4, "ZEC"),
         (5, "ARB"),
         (None, "ETH"),
+    ]
+
+    chatgpt_1110 = responses["2026-11-10_chatgpt.md"]
+    assert chatgpt_1110.status == "ok"
+    assert chatgpt_1110.model == "Instant"
+    assert chatgpt_1110.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1110.transcript_fidelity == "reformatted"
+    assert chatgpt_1110.collected_at == "2026-11-10T14:00:58Z"
+    assert chatgpt_1110.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1110.text.endswith(
+        "Sources: November 9–10 market outlooks from Gate, Crypto.com, RoboForex, and crypto ETF flow data."
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1110.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "XRP"),
+        (5, "HYPE"),
+    ]
+
+    claude_1110 = responses["2026-11-10_claude.md"]
+    assert claude_1110.status == "skipped"
+    assert claude_1110.skip_reason == "organization disabled"
+    assert claude_1110.prompt_id == "weekly_watch_v1"
+    assert claude_1110.transcript_fidelity == "not_collected"
+    assert claude_1110.collected_at == "2026-11-10T14:01:00Z"
+    assert claude_1110.extraction.mentions == ()
+    assert claude_1110.text == "No answer was collected."
+
+    gemini_1110 = responses["2026-11-10_gemini.md"]
+    assert gemini_1110.status == "ok"
+    assert gemini_1110.model == "Auto"
+    assert gemini_1110.prompt_id == "weekly_watch_v1"
+    assert gemini_1110.transcript_fidelity == "reformatted"
+    assert gemini_1110.collected_at == "2026-11-10T14:01:43Z"
+    assert gemini_1110.text.startswith(
+        "Here are 5 top cryptocurrencies to watch right now, ranked by market relevance, institutional flows, and near-term catalysts:"
+    )
+    assert "5. Hyperliquid (HYPE)" in gemini_1110.text
+    assert gemini_1110.text.endswith(
+        "Would you like to track specific key support/resistance levels for any of these tokens, or explore recent ETF inflow data in detail?"
+    )
+    assert [(mention.rank, mention.symbol) for mention in gemini_1110.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "XRP"),
+        (5, "HYPE"),
+    ]
+
+    grok_1110 = responses["2026-11-10_grok.md"]
+    assert grok_1110.status == "ok"
+    assert grok_1110.model == "Fast"
+    assert grok_1110.prompt_id == "weekly_watch_v1"
+    assert grok_1110.transcript_fidelity == "reformatted"
+    assert grok_1110.collected_at == "2026-11-10T14:02:38Z"
+    assert grok_1110.text.startswith("1. Bitcoin (BTC)")
+    assert "5. Quant (QNT)" in grok_1110.text
+    assert grok_1110.text.endswith(
+        "Markets can shift quickly on unexpected news or data surprises. Position sizing, stop-losses, and diversification matter more than any single weekly list."
+    )
+    assert [(mention.rank, mention.symbol) for mention in grok_1110.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ZEC"),
+        (4, "HYPE"),
     ]
 
 
