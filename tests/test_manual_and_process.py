@@ -89,6 +89,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-10_gemini.md",
         "2026-11-10_claude.md",
         "2026-11-10_grok.md",
+        "2026-11-11_chatgpt.md",
+        "2026-11-11_gemini.md",
+        "2026-11-11_claude.md",
+        "2026-11-11_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1090,6 +1094,73 @@ def test_manual_files_parse_and_examples_are_ignored():
         (2, "SOL"),
         (3, "ZEC"),
         (4, "HYPE"),
+    ]
+
+    chatgpt_1111 = responses["2026-11-11_chatgpt.md"]
+    assert chatgpt_1111.status == "ok"
+    assert chatgpt_1111.model == "Instant"
+    assert chatgpt_1111.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1111.transcript_fidelity == "reformatted"
+    assert chatgpt_1111.collected_at == "2026-11-11T14:02:29Z"
+    assert chatgpt_1111.text.startswith("Top 5 cryptocurrencies to watch this week")
+    assert chatgpt_1111.text.endswith(
+        "Sources: The Block ETF dashboard · Reuters market report"
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1111.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "BNB"),
+        (5, "XRP"),
+    ]
+
+    claude_1111 = responses["2026-11-11_claude.md"]
+    assert claude_1111.status == "skipped"
+    assert claude_1111.skip_reason == "organization disabled"
+    assert claude_1111.prompt_id == "weekly_watch_v1"
+    assert claude_1111.transcript_fidelity == "not_collected"
+    assert claude_1111.collected_at == "2026-11-11T14:05:00Z"
+    assert claude_1111.extraction.mentions == ()
+    assert claude_1111.text == "No answer was collected."
+
+    gemini_1111 = responses["2026-11-11_gemini.md"]
+    assert gemini_1111.status == "ok"
+    assert gemini_1111.model == "Auto"
+    assert gemini_1111.prompt_id == "weekly_watch_v1"
+    assert gemini_1111.transcript_fidelity == "reformatted"
+    assert gemini_1111.collected_at == "2026-11-11T14:03:26Z"
+    assert gemini_1111.text.startswith(
+        "Here are 5 cryptocurrencies worth monitoring closely right now, ranked by a balance of market stability, catalysts, and risk-reward profile."
+    )
+    assert "5. Zcash (ZEC)" in gemini_1111.text
+    assert gemini_1111.text.endswith(
+        "Always manage exposure and set clear risk limits."
+    )
+    assert [(mention.rank, mention.symbol) for mention in gemini_1111.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "HYPE"),
+        (5, "ZEC"),
+    ]
+
+    grok_1111 = responses["2026-11-11_grok.md"]
+    assert grok_1111.status == "ok"
+    assert grok_1111.model == "Fast"
+    assert grok_1111.prompt_id == "weekly_watch_v1"
+    assert grok_1111.transcript_fidelity == "reformatted"
+    assert grok_1111.collected_at == "2026-11-11T14:04:06Z"
+    assert grok_1111.text.startswith("1. Bitcoin (BTC)")
+    assert "5. Avalanche (AVAX)" in grok_1111.text
+    assert grok_1111.text.endswith(
+        "Always do your own research, consider risk management, and treat this as informational only."
+    )
+    assert [(mention.rank, mention.symbol) for mention in grok_1111.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "HYPE"),
+        (5, "AVAX"),
     ]
 
 
