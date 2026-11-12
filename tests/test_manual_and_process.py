@@ -93,6 +93,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-11_gemini.md",
         "2026-11-11_claude.md",
         "2026-11-11_grok.md",
+        "2026-11-12_chatgpt.md",
+        "2026-11-12_gemini.md",
+        "2026-11-12_claude.md",
+        "2026-11-12_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1161,6 +1165,77 @@ def test_manual_files_parse_and_examples_are_ignored():
         (3, "ETH"),
         (4, "HYPE"),
         (5, "AVAX"),
+    ]
+
+    chatgpt_1112 = responses["2026-11-12_chatgpt.md"]
+    assert chatgpt_1112.status == "ok"
+    assert chatgpt_1112.model == "Instant"
+    assert chatgpt_1112.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1112.transcript_fidelity == "reformatted"
+    assert chatgpt_1112.collected_at == "2026-11-12T14:03:35Z"
+    assert chatgpt_1112.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1112.text.endswith(
+        "Crypto assets can move sharply in either direction. Rankings are analytical opinions, not personalized investment advice."
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1112.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "XRP"),
+        (5, "BNB"),
+    ]
+
+    claude_1112 = responses["2026-11-12_claude.md"]
+    assert claude_1112.status == "skipped"
+    assert claude_1112.skip_reason == "organization disabled"
+    assert claude_1112.prompt_id == "weekly_watch_v1"
+    assert claude_1112.transcript_fidelity == "not_collected"
+    assert claude_1112.collected_at == "2026-11-12T14:08:00Z"
+    assert claude_1112.extraction.mentions == ()
+    assert claude_1112.text == "No answer was collected."
+
+    gemini_1112 = responses["2026-11-12_gemini.md"]
+    assert gemini_1112.status == "ok"
+    assert gemini_1112.model == "Auto"
+    assert gemini_1112.prompt_id == "weekly_watch_v1"
+    assert gemini_1112.transcript_fidelity == "reformatted"
+    assert gemini_1112.collected_at == "2026-11-12T14:04:15Z"
+    assert gemini_1112.text.startswith(
+        "With total crypto market capitalization pulling back to roughly $2.70 trillion amid tech stock weakness and shifting Federal Reserve rate expectations, market attention this week is heavily focused on key technical support levels, immediate conference/upgrade catalysts, and relative strength."
+    )
+    assert "5. XRP (XRP)" in gemini_1112.text
+    assert gemini_1112.text.endswith(
+        "Note: Cryptocurrency markets are highly volatile; this overview reflects current market data and technical catalysts rather than personalized financial advice."
+    )
+    # Arbitrum is named as a Layer-2 example on the Ethereum section and does
+    # not inherit a rank.
+    assert [(mention.rank, mention.symbol) for mention in gemini_1112.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "HYPE"),
+        (4, "ETH"),
+        (5, "XRP"),
+        (None, "ARB"),
+    ]
+
+    grok_1112 = responses["2026-11-12_grok.md"]
+    assert grok_1112.status == "ok"
+    assert grok_1112.model == "Fast"
+    assert grok_1112.prompt_id == "weekly_watch_v1"
+    assert grok_1112.transcript_fidelity == "reformatted"
+    assert grok_1112.collected_at == "2026-11-12T14:05:00Z"
+    assert grok_1112.text.startswith("1. Bitcoin (BTC)")
+    assert "5. Quant (QNT)" in grok_1112.text
+    assert grok_1112.text.endswith(
+        "Monitor ETF flows, on-chain activity, and event outcomes closely."
+    )
+    # Quant (QNT) is rank 5 in the answer. It is not in the coin registry, so
+    # the mention table keeps the four recognized ranks.
+    assert [(mention.rank, mention.symbol) for mention in grok_1112.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "HYPE"),
+        (4, "ZEC"),
     ]
 
 
