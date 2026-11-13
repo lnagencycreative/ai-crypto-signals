@@ -97,6 +97,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-12_gemini.md",
         "2026-11-12_claude.md",
         "2026-11-12_grok.md",
+        "2026-11-13_chatgpt.md",
+        "2026-11-13_gemini.md",
+        "2026-11-13_claude.md",
+        "2026-11-13_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1236,6 +1240,73 @@ def test_manual_files_parse_and_examples_are_ignored():
         (2, "SOL"),
         (3, "HYPE"),
         (4, "ZEC"),
+    ]
+
+    chatgpt_1113 = responses["2026-11-13_chatgpt.md"]
+    assert chatgpt_1113.status == "ok"
+    assert chatgpt_1113.model == "Instant"
+    assert chatgpt_1113.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1113.transcript_fidelity == "reformatted"
+    assert chatgpt_1113.collected_at == "2026-11-13T14:03:48Z"
+    assert chatgpt_1113.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1113.text.endswith("Price levels are monitoring thresholds")
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1113.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "HYPE"),
+        (5, "XRP"),
+    ]
+
+    claude_1113 = responses["2026-11-13_claude.md"]
+    assert claude_1113.status == "skipped"
+    assert claude_1113.skip_reason == "organization disabled"
+    assert claude_1113.prompt_id == "weekly_watch_v1"
+    assert claude_1113.transcript_fidelity == "not_collected"
+    assert claude_1113.collected_at == "2026-11-13T14:05:42Z"
+    assert claude_1113.extraction.mentions == ()
+    assert claude_1113.text == "No answer was collected."
+
+    gemini_1113 = responses["2026-11-13_gemini.md"]
+    assert gemini_1113.status == "ok"
+    assert gemini_1113.model == "Auto"
+    assert gemini_1113.prompt_id == "weekly_watch_v1"
+    assert gemini_1113.transcript_fidelity == "reformatted"
+    assert gemini_1113.collected_at == "2026-11-13T14:04:25Z"
+    assert gemini_1113.text.startswith(
+        "With digital asset markets navigating a choppy mid-November pullback alongside major ecosystem events, the following five cryptocurrencies warrant the closest attention this week, ranked by a blend of immediate catalysts, technical inflection points, and market liquidity."
+    )
+    assert "5. Zcash (ZEC)" in gemini_1113.text
+    assert gemini_1113.text.endswith(
+        "Note: Cryptocurrency markets are highly volatile, and this watchlist reflects market catalysts and technical setups rather than personalized financial advice."
+    )
+    assert [(mention.rank, mention.symbol) for mention in gemini_1113.extraction.mentions] == [
+        (1, "SOL"),
+        (2, "BTC"),
+        (3, "ETH"),
+        (4, "HYPE"),
+        (5, "ZEC"),
+    ]
+
+    grok_1113 = responses["2026-11-13_grok.md"]
+    assert grok_1113.status == "ok"
+    assert grok_1113.model == "Fast"
+    assert grok_1113.prompt_id == "weekly_watch_v1"
+    assert grok_1113.transcript_fidelity == "reformatted"
+    assert grok_1113.collected_at == "2026-11-13T14:04:55Z"
+    assert grok_1113.text.startswith("1. Solana (SOL)")
+    assert "5. Ethereum (ETH)" in grok_1113.text
+    assert grok_1113.text.endswith("Prices and catalysts can shift quickly.")
+    # XRP is an honorable mention and does not inherit a rank. Quant (QNT)
+    # and Midnight (NIGHT) are named as higher-risk runners-up and are not
+    # in the coin registry.
+    assert [(mention.rank, mention.symbol) for mention in grok_1113.extraction.mentions] == [
+        (1, "SOL"),
+        (2, "BTC"),
+        (3, "ZEC"),
+        (4, "HYPE"),
+        (5, "ETH"),
+        (None, "XRP"),
     ]
 
 
