@@ -299,3 +299,18 @@ manual:2026-11-13_grok,2026-11-13T14:04:55Z,xai,Grok,manual_chat,zcash,ZEC,Zcash
 manual:2026-11-13_grok,2026-11-13T14:04:55Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-13_grok,2026-11-13T14:04:55Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-13_grok,2026-11-13T14:04:55Z,xai,Grok,manual_chat,ripple,XRP,XRP,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-14_chatgpt,2026-11-14T14:00:51Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_chatgpt,2026-11-14T14:00:51Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_chatgpt,2026-11-14T14:00:51Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_chatgpt,2026-11-14T14:00:51Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_chatgpt,2026-11-14T14:00:51Z,openai,ChatGPT,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_gemini,2026-11-14T14:01:37Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,The Macro Anchor at a Multi-Week Inflection Point,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_gemini,2026-11-14T14:01:37Z,google,Gemini,manual_chat,solana,SOL,Solana,watch,2.0,inline,True,Flagship Catalyst at Breakpoint 2026,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_gemini,2026-11-14T14:01:37Z,google,Gemini,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,Relative Strength & Surging Derivatives Volume,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_gemini,2026-11-14T14:01:37Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,4.0,inline,True,"High-Stakes Support Test Below $2,000",unspecified,,,name|rank|ticker,True
+manual:2026-11-14_gemini,2026-11-14T14:01:37Z,google,Gemini,manual_chat,ripple,XRP,XRP,watch,5.0,inline,True,Fundamental Progress vs. Psychological Breakdown,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_grok,2026-11-14T14:02:18Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_grok,2026-11-14T14:02:18Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_grok,2026-11-14T14:02:18Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_grok,2026-11-14T14:02:18Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-14_grok,2026-11-14T14:02:18Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
