@@ -105,6 +105,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-14_gemini.md",
         "2026-11-14_claude.md",
         "2026-11-14_grok.md",
+        "2026-11-15_chatgpt.md",
+        "2026-11-15_gemini.md",
+        "2026-11-15_claude.md",
+        "2026-11-15_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1378,6 +1382,78 @@ def test_manual_files_parse_and_examples_are_ignored():
         (3, "HYPE"),
         (4, "ETH"),
         (5, "ZEC"),
+    ]
+
+    chatgpt_1115 = responses["2026-11-15_chatgpt.md"]
+    assert chatgpt_1115.status == "ok"
+    assert chatgpt_1115.model == "Instant"
+    assert chatgpt_1115.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1115.transcript_fidelity == "reformatted"
+    assert chatgpt_1115.collected_at == "2026-11-15T13:58:24Z"
+    assert chatgpt_1115.text.startswith("Top 5 cryptocurrencies to watch this week")
+    assert chatgpt_1115.text.endswith(
+        "Would you like the next watchlist ranked specifically for short-term profit potential (7 days) or long-term investment potential (6–12 months)?"
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1115.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "HYPE"),
+        (5, "XRP"),
+    ]
+
+    claude_1115 = responses["2026-11-15_claude.md"]
+    assert claude_1115.status == "skipped"
+    assert claude_1115.skip_reason == "organization disabled"
+    assert claude_1115.prompt_id == "weekly_watch_v1"
+    assert claude_1115.transcript_fidelity == "not_collected"
+    assert claude_1115.collected_at == "2026-11-15T13:59:06Z"
+    assert claude_1115.extraction.mentions == ()
+    assert claude_1115.text == "No answer was collected."
+
+    gemini_1115 = responses["2026-11-15_gemini.md"]
+    assert gemini_1115.status == "ok"
+    assert gemini_1115.model == "Auto"
+    assert gemini_1115.prompt_id == "weekly_watch_v1"
+    assert gemini_1115.transcript_fidelity == "reformatted"
+    assert gemini_1115.collected_at == "2026-11-15T13:59:25Z"
+    assert gemini_1115.text.startswith(
+        "The cryptocurrency market is navigating a pivotal macro and technical stretch for the week of November 15–22, 2026, following a broader pullback across digital assets. [Binance]"
+    )
+    assert "5. XRP (XRP)" in gemini_1115.text
+    assert gemini_1115.text.endswith(
+        "Are you looking at these for short-term swing trades around this week's catalysts, or building a longer-term accumulation watchlist?"
+    )
+    assert [(mention.rank, mention.symbol) for mention in gemini_1115.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "HYPE"),
+        (5, "XRP"),
+    ]
+
+    grok_1115 = responses["2026-11-15_grok.md"]
+    assert grok_1115.status == "ok"
+    assert grok_1115.model == "Fast"
+    assert grok_1115.prompt_id == "weekly_watch_v1"
+    assert grok_1115.transcript_fidelity == "reformatted"
+    assert grok_1115.collected_at == "2026-11-15T14:00:38Z"
+    assert grok_1115.text.startswith("1. Bitcoin (BTC)")
+    assert "5. Zcash (ZEC)" in grok_1115.text
+    assert grok_1115.text.endswith(
+        "Prices and narratives can shift rapidly with macro data or unexpected news."
+    )
+    # ARB is named in a token-unlock aside and Cosmos is named among recent
+    # gainers. Neither inherits a rank. Jupiter, Quant, and STRK are named
+    # in that same aside and are not in the coin registry.
+    assert [(mention.rank, mention.symbol) for mention in grok_1115.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "HYPE"),
+        (4, "ETH"),
+        (5, "ZEC"),
+        (None, "ARB"),
+        (None, "ATOM"),
     ]
 
 
