@@ -331,3 +331,16 @@ manual:2026-11-15_grok,2026-11-15T14:00:38Z,xai,Grok,manual_chat,ethereum,ETH,Et
 manual:2026-11-15_grok,2026-11-15T14:00:38Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,5.0,inline,True,"Privacy narrative + recent technical upgrade (NU7, which meaningfully reduced block times). It has maintained relatively high trading volume and shown periods of outperformance or resilience during risk-off stretches. An upcoming community vote (mid-to-late November) on treasury/dev-fund related items adds event risk. Privacy coins can attract attention when broader market uncertainty rises",unspecified,,,name|rank|ticker,True
 manual:2026-11-15_grok,2026-11-15T14:00:38Z,xai,Grok,manual_chat,arbitrum,ARB,Arbitrum,watch,,,False,,unspecified,,,ticker,False
 manual:2026-11-15_grok,2026-11-15T14:00:38Z,xai,Grok,manual_chat,cosmos,ATOM,Cosmos Hub,watch,,,False,,unspecified,,,name,False
+manual:2026-11-16_chatgpt,2026-11-16T13:59:40Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_chatgpt,2026-11-16T13:59:40Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_chatgpt,2026-11-16T13:59:40Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_chatgpt,2026-11-16T13:59:40Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_chatgpt,2026-11-16T13:59:40Z,openai,ChatGPT,manual_chat,avalanche-2,AVAX,Avalanche,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_gemini,2026-11-16T14:00:55Z,google,Gemini,manual_chat,solana,SOL,Solana,watch,1.0,inline,True,Immediate Ecosystem Catalyst,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_gemini,2026-11-16T14:00:55Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,2.0,inline,True,Macro & Options Volatility Hub,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_gemini,2026-11-16T14:00:55Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,3.0,inline,True,Key Psychological Support Test,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_gemini,2026-11-16T14:00:55Z,google,Gemini,manual_chat,arbitrum,ARB,Arbitrum,watch,4.0,inline,True,Major Supply Unlock,unspecified,,,name|rank|ticker,False
+manual:2026-11-16_grok,2026-11-16T14:01:47Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_grok,2026-11-16T14:01:47Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_grok,2026-11-16T14:01:47Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-16_grok,2026-11-16T14:01:47Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
