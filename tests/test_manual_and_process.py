@@ -113,6 +113,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-16_gemini.md",
         "2026-11-16_claude.md",
         "2026-11-16_grok.md",
+        "2026-11-17_chatgpt.md",
+        "2026-11-17_gemini.md",
+        "2026-11-17_claude.md",
+        "2026-11-17_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1530,6 +1534,78 @@ def test_manual_files_parse_and_examples_are_ignored():
         (2, "SOL"),
         (3, "HYPE"),
         (4, "ETH"),
+    ]
+
+    chatgpt_1117 = responses["2026-11-17_chatgpt.md"]
+    assert chatgpt_1117.status == "ok"
+    assert chatgpt_1117.model == "Instant"
+    assert chatgpt_1117.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1117.transcript_fidelity == "reformatted"
+    assert chatgpt_1117.collected_at == "2026-11-17T14:02:22Z"
+    assert chatgpt_1117.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1117.text.endswith(
+        "Would you like me to rank these same five specifically by highest potential percentage gain over the next 7 days, including bullish and bearish scenarios?"
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1117.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "XRP"),
+        (5, "HYPE"),
+    ]
+
+    claude_1117 = responses["2026-11-17_claude.md"]
+    assert claude_1117.status == "skipped"
+    assert claude_1117.skip_reason == "organization disabled"
+    assert claude_1117.prompt_id == "weekly_watch_v1"
+    assert claude_1117.transcript_fidelity == "not_collected"
+    assert claude_1117.collected_at == "2026-11-17T14:03:16Z"
+    assert claude_1117.extraction.mentions == ()
+    assert claude_1117.text == "No answer was collected."
+
+    gemini_1117 = responses["2026-11-17_gemini.md"]
+    assert gemini_1117.status == "ok"
+    assert gemini_1117.model == "Auto"
+    assert gemini_1117.prompt_id == "weekly_watch_v1"
+    assert gemini_1117.transcript_fidelity == "reformatted"
+    assert gemini_1117.collected_at == "2026-11-17T14:03:48Z"
+    assert gemini_1117.text.startswith(
+        "Following a sharp mid-November market pullback triggered by exchange security concerns, stablecoin outflows, and broader tech-sector weakness, the crypto market is entering a critical consolidation phase. [BeInCrypto]"
+    )
+    assert "5. Pieverse (PIEVERSE)" in gemini_1117.text
+    assert gemini_1117.text.endswith(
+        "Would you like to dive deeper into the technical chart levels for one of these, or look at smaller-cap altcoins in a specific sector like AI or DeFi?"
+    )
+    # Pieverse (PIEVERSE) is rank 5 in the answer. It is not in the coin
+    # registry, so the mention table keeps the four recognized ranks.
+    assert [(mention.rank, mention.symbol) for mention in gemini_1117.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "HYPE"),
+        (3, "ZEC"),
+        (4, "XRP"),
+    ]
+
+    grok_1117 = responses["2026-11-17_grok.md"]
+    assert grok_1117.status == "ok"
+    assert grok_1117.model == "Fast"
+    assert grok_1117.prompt_id == "weekly_watch_v1"
+    assert grok_1117.transcript_fidelity == "reformatted"
+    assert grok_1117.collected_at == "2026-11-17T14:04:51Z"
+    assert grok_1117.text.startswith(
+        "Bitcoin (BTC), Zcash (ZEC), Hyperliquid (HYPE), Solana (SOL), and Ethereum (ETH), ranked roughly by priority for monitoring this week (starting ~November 17, 2026)."
+    )
+    assert "5. Ethereum (ETH)" in grok_1117.text
+    assert grok_1117.text.endswith("68 sources")
+    # Midnight (NIGHT) and Quant (QNT) are named in the honorable-mentions
+    # paragraph and are not in the coin registry. Cardano is named in that
+    # same aside and is stored without a rank.
+    assert [(mention.rank, mention.symbol) for mention in grok_1117.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ZEC"),
+        (3, "HYPE"),
+        (4, "SOL"),
+        (5, "ETH"),
+        (None, "ADA"),
     ]
 
 
