@@ -117,6 +117,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-17_gemini.md",
         "2026-11-17_claude.md",
         "2026-11-17_grok.md",
+        "2026-11-18_chatgpt.md",
+        "2026-11-18_gemini.md",
+        "2026-11-18_claude.md",
+        "2026-11-18_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1606,6 +1610,78 @@ def test_manual_files_parse_and_examples_are_ignored():
         (4, "SOL"),
         (5, "ETH"),
         (None, "ADA"),
+    ]
+
+    chatgpt_1118 = responses["2026-11-18_chatgpt.md"]
+    assert chatgpt_1118.status == "ok"
+    assert chatgpt_1118.model == "Instant"
+    assert chatgpt_1118.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1118.transcript_fidelity == "reformatted"
+    assert chatgpt_1118.collected_at == "2026-11-18T13:59:43Z"
+    assert chatgpt_1118.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert chatgpt_1118.text.endswith(
+        "Would you like me to rank these five specifically by which has the greatest potential to gain over the next 7 days, rather than overall watchlist quality?"
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1118.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "XRP"),
+        (5, "LINK"),
+    ]
+
+    claude_1118 = responses["2026-11-18_claude.md"]
+    assert claude_1118.status == "skipped"
+    assert claude_1118.skip_reason == "organization disabled"
+    assert claude_1118.prompt_id == "weekly_watch_v1"
+    assert claude_1118.transcript_fidelity == "not_collected"
+    assert claude_1118.collected_at == "2026-11-18T14:00:28Z"
+    assert claude_1118.extraction.mentions == ()
+    assert claude_1118.text == "No answer was collected."
+
+    gemini_1118 = responses["2026-11-18_gemini.md"]
+    assert gemini_1118.status == "ok"
+    assert gemini_1118.model == "Auto"
+    assert gemini_1118.prompt_id == "weekly_watch_v1"
+    assert gemini_1118.transcript_fidelity == "reformatted"
+    assert gemini_1118.collected_at == "2026-11-18T14:01:01Z"
+    assert gemini_1118.text.startswith(
+        "With the crypto market currently navigating extreme fear (the Fear & Greed Index recently hit 10) alongside macro pressure ahead of the Federal Reserve's December interest-rate decision, price action this week is driven by institutional accumulation at key support levels and standalone altcoin catalysts."
+    )
+    assert "4. Midnight (NIGHT)" in gemini_1118.text
+    assert "5. Pieverse (PIEVERSE)" in gemini_1118.text
+    assert gemini_1118.text.endswith(
+        "Are you looking at these for short-term swing trades around technical levels, or longer-term accumulation?"
+    )
+    # Midnight (NIGHT) and Pieverse (PIEVERSE) are ranks 4 and 5 in the
+    # answer. Neither is in the coin registry, so the mention table keeps the
+    # three recognized ranks. Cardano is named in the Midnight section and is
+    # stored without a rank.
+    assert [(mention.rank, mention.symbol) for mention in gemini_1118.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "LINK"),
+        (None, "ADA"),
+    ]
+    assert gemini_1118.extraction.unresolved_symbols == ()
+
+    grok_1118 = responses["2026-11-18_grok.md"]
+    assert grok_1118.status == "ok"
+    assert grok_1118.model == "Fast"
+    assert grok_1118.prompt_id == "weekly_watch_v1"
+    assert grok_1118.transcript_fidelity == "reformatted"
+    assert grok_1118.collected_at == "2026-11-18T14:01:43Z"
+    assert grok_1118.text.startswith(
+        "Bitcoin (BTC), Zcash (ZEC), Hyperliquid (HYPE), Solana (SOL), and Ethereum (ETH) stand out to watch this week (around Nov 18, 2026), ranked by a mix of market influence, near-term catalysts, relative strength/activity, and potential volatility amid a cautious, fear-heavy market (BTC near $64k–$65k after a sharp weekly drop, elevated yields, ETF outflows, and Extreme Fear readings)."
+    )
+    assert "5. Ethereum (ETH)" in grok_1118.text
+    assert grok_1118.text.endswith("64 sources")
+    assert [(mention.rank, mention.symbol) for mention in grok_1118.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ZEC"),
+        (3, "HYPE"),
+        (4, "SOL"),
+        (5, "ETH"),
     ]
 
 
