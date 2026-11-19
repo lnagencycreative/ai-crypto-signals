@@ -373,3 +373,16 @@ manual:2026-11-18_grok,2026-11-18T14:01:43Z,xai,Grok,manual_chat,zcash,ZEC,Zcash
 manual:2026-11-18_grok,2026-11-18T14:01:43Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-18_grok,2026-11-18T14:01:43Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
 manual:2026-11-18_grok,2026-11-18T14:01:43Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_chatgpt,2026-11-19T13:58:57Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_chatgpt,2026-11-19T13:58:57Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_chatgpt,2026-11-19T13:58:57Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_chatgpt,2026-11-19T13:58:57Z,openai,ChatGPT,manual_chat,hedera-hashgraph,HBAR,Hedera,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,False
+manual:2026-11-19_gemini,2026-11-19T14:00:28Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,The Macro & Institutional Bellwether,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_gemini,2026-11-19T14:00:28Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,High-Conviction Institutional Accumulation,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_gemini,2026-11-19T14:00:28Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,watch,3.0,inline,True,Real-World Asset (RWA) & Institutional Infrastructure,unspecified,,,name|rank|ticker,True
+manual:2026-11-19_gemini,2026-11-19T14:00:28Z,google,Gemini,manual_chat,zcash,ZEC,Zcash,watch,4.0,inline,True,Post-Upgrade Momentum & Privacy Sector Leader,positive,momentum,,name|rank|ticker,True
+manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,"then Ethereum (ETH), Hyperliquid (HYPE), Zcash (ZEC), and Solana (SOL)",unspecified,,,name|rank|ticker,True
+manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,ethereum,ETH,Ethereum,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,,,False,,unspecified,,,name|ticker,True

@@ -121,6 +121,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-18_gemini.md",
         "2026-11-18_claude.md",
         "2026-11-18_grok.md",
+        "2026-11-19_chatgpt.md",
+        "2026-11-19_gemini.md",
+        "2026-11-19_claude.md",
+        "2026-11-19_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1683,6 +1687,81 @@ def test_manual_files_parse_and_examples_are_ignored():
         (4, "SOL"),
         (5, "ETH"),
     ]
+
+    chatgpt_1119 = responses["2026-11-19_chatgpt.md"]
+    assert chatgpt_1119.status == "ok"
+    assert chatgpt_1119.model == "Instant"
+    assert chatgpt_1119.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1119.transcript_fidelity == "reformatted"
+    assert chatgpt_1119.collected_at == "2026-11-19T13:58:57Z"
+    assert chatgpt_1119.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert "5. Jupiter (JUP)" in chatgpt_1119.text
+    assert chatgpt_1119.text.endswith(
+        "Market analysis as of November 19, 2026. Not personalized financial advice."
+    )
+    # Jupiter (JUP) is rank 5 in the answer. It is not in the coin registry, so
+    # the mention table keeps the four recognized ranks.
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1119.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "ETH"),
+        (4, "HBAR"),
+    ]
+    assert chatgpt_1119.extraction.unresolved_symbols == ()
+
+    claude_1119 = responses["2026-11-19_claude.md"]
+    assert claude_1119.status == "skipped"
+    assert claude_1119.skip_reason == "organization disabled"
+    assert claude_1119.prompt_id == "weekly_watch_v1"
+    assert claude_1119.transcript_fidelity == "not_collected"
+    assert claude_1119.collected_at == "2026-11-19T14:00:00Z"
+    assert claude_1119.extraction.mentions == ()
+    assert claude_1119.text == "No answer was collected."
+
+    gemini_1119 = responses["2026-11-19_gemini.md"]
+    assert gemini_1119.status == "ok"
+    assert gemini_1119.model == "Auto"
+    assert gemini_1119.prompt_id == "weekly_watch_v1"
+    assert gemini_1119.transcript_fidelity == "reformatted"
+    assert gemini_1119.collected_at == "2026-11-19T14:00:28Z"
+    assert gemini_1119.text.startswith(
+        "With the broader crypto market experiencing extreme fear (Fear & Greed Index hovering near 10) alongside shrinking stablecoin liquidity and anticipation of a potential December Federal Reserve rate hike, watching the market this week comes down to balancing institutional resilience against high-momentum technical catalysts."
+    )
+    assert "5. Pieverse (PIEVERSE)" in gemini_1119.text
+    assert gemini_1119.text.endswith(
+        "Would you like to dive deeper into the technical chart setups for any of these, or look at how a specific allocation across large-cap vs. high-beta coins might look?"
+    )
+    # Pieverse (PIEVERSE) is rank 5 in the answer. It is not in the coin
+    # registry, so the mention table keeps the four recognized ranks.
+    assert [(mention.rank, mention.symbol) for mention in gemini_1119.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "LINK"),
+        (4, "ZEC"),
+    ]
+    assert gemini_1119.extraction.unresolved_symbols == ()
+
+    grok_1119 = responses["2026-11-19_grok.md"]
+    assert grok_1119.status == "ok"
+    assert grok_1119.model == "Fast"
+    assert grok_1119.prompt_id == "weekly_watch_v1"
+    assert grok_1119.transcript_fidelity == "reformatted"
+    assert grok_1119.collected_at == "2026-11-19T14:01:28Z"
+    assert grok_1119.text.startswith(
+        "1. Bitcoin (BTC) — then Ethereum (ETH), Hyperliquid (HYPE), Zcash (ZEC), and Solana (SOL)."
+    )
+    assert grok_1119.text.endswith("40 sources")
+    # The opening line is numbered and names Bitcoin first, so BTC keeps rank
+    # 1. The later section headings are unnumbered, so Ethereum, Hyperliquid,
+    # Solana, and Zcash are stored without a rank.
+    assert [(mention.rank, mention.symbol) for mention in grok_1119.extraction.mentions] == [
+        (1, "BTC"),
+        (None, "ETH"),
+        (None, "HYPE"),
+        (None, "SOL"),
+        (None, "ZEC"),
+    ]
+    assert grok_1119.extraction.unresolved_symbols == ()
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):
