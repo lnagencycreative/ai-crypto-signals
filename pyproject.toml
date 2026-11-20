@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-crypto-signals"
+version = "0.1.0"
+description = "Pilot study comparing AI chatbot crypto mentions with Polymarket odds and CoinGecko prices."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Lael Nowlin" }]
+dependencies = [
+  "requests>=2.32",
+  "pandas>=2.2",
+  "PyYAML>=6.0",
+  "matplotlib>=3.9",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "nbformat>=5.10",
+  "nbclient>=0.10",
+  "ipykernel>=6.29",
+]
+
+[project.scripts]
+ai-crypto-signals = "ai_crypto_signals.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
