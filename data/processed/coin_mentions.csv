@@ -386,3 +386,21 @@ manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,ethereum,ETH,Et
 manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,,,False,,unspecified,,,name|ticker,True
 manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,,,False,,unspecified,,,name|ticker,True
 manual:2026-11-19_grok,2026-11-19T14:01:28Z,xai,Grok,manual_chat,zcash,ZEC,Zcash,watch,,,False,,unspecified,,,name|ticker,True
+manual:2026-11-20_chatgpt,2026-11-20T14:05:15Z,openai,ChatGPT,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_chatgpt,2026-11-20T14:05:15Z,openai,ChatGPT,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_chatgpt,2026-11-20T14:05:15Z,openai,ChatGPT,manual_chat,solana,SOL,Solana,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_chatgpt,2026-11-20T14:05:15Z,openai,ChatGPT,manual_chat,ripple,XRP,XRP,watch,4.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_chatgpt,2026-11-20T14:05:15Z,openai,ChatGPT,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,The Macro Liquidity & Market-Direction Benchmark,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,ethereum,ETH,Ethereum,watch,2.0,inline,True,The DeFi & Layer-2 Settlement Bellwether,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,solana,SOL,Solana,watch,3.0,inline,True,The High-Throughput Retail & DEX Activity Leader,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,chainlink,LINK,Chainlink,watch,4.0,inline,True,The Cross-Chain & Institutional Infrastructure Play,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,sui,SUI,Sui,watch,5.0,inline,True,The High-Beta Narrative Slot,unspecified,,,name|rank|ticker,False
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,arbitrum,ARB,Arbitrum,watch,,,False,,unspecified,,,name,False
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,optimism,OP,Optimism,watch,,,False,,unspecified,,,name,False
+manual:2026-11-20_gemini,2026-11-20T14:06:43Z,google,Gemini,manual_chat,bittensor,TAO,Bittensor,watch,,,False,,unspecified,,,name|ticker,False
+manual:2026-11-20_grok,2026-11-20T14:07:53Z,xai,Grok,manual_chat,bitcoin,BTC,Bitcoin,watch,1.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_grok,2026-11-20T14:07:53Z,xai,Grok,manual_chat,solana,SOL,Solana,watch,2.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_grok,2026-11-20T14:07:53Z,xai,Grok,manual_chat,hyperliquid,HYPE,Hyperliquid,watch,3.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_grok,2026-11-20T14:07:53Z,xai,Grok,manual_chat,stellar,XLM,Stellar,watch,5.0,inline,True,,unspecified,,,name|rank|ticker,True
+manual:2026-11-20_grok,2026-11-20T14:07:53Z,xai,Grok,manual_chat,injective-protocol,INJ,Injective,watch,,,False,,unspecified,,,ticker,False

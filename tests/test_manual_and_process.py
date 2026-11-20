@@ -125,6 +125,10 @@ def test_manual_files_parse_and_examples_are_ignored():
         "2026-11-19_gemini.md",
         "2026-11-19_claude.md",
         "2026-11-19_grok.md",
+        "2026-11-20_chatgpt.md",
+        "2026-11-20_gemini.md",
+        "2026-11-20_claude.md",
+        "2026-11-20_grok.md",
     }
     responses = {item.path: item for item in load_manual_responses(root)}
 
@@ -1762,6 +1766,87 @@ def test_manual_files_parse_and_examples_are_ignored():
         (None, "ZEC"),
     ]
     assert grok_1119.extraction.unresolved_symbols == ()
+
+    chatgpt_1120 = responses["2026-11-20_chatgpt.md"]
+    assert chatgpt_1120.status == "ok"
+    assert chatgpt_1120.model == "Instant"
+    assert chatgpt_1120.prompt_id == "weekly_watch_v1"
+    assert chatgpt_1120.transcript_fidelity == "reformatted"
+    assert chatgpt_1120.collected_at == "2026-11-20T14:05:15Z"
+    assert chatgpt_1120.text.startswith("Top 5 Cryptocurrencies to Watch This Week")
+    assert "5. Hyperliquid (HYPE)" in chatgpt_1120.text
+    assert chatgpt_1120.text.endswith(
+        "Sources: CoinDesk, Crypto.news, Delta Exchange, Crypto.com and The Motley Fool, November 2026."
+    )
+    assert [(mention.rank, mention.symbol) for mention in chatgpt_1120.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "XRP"),
+        (5, "HYPE"),
+    ]
+    assert chatgpt_1120.extraction.unresolved_symbols == ()
+
+    claude_1120 = responses["2026-11-20_claude.md"]
+    assert claude_1120.status == "skipped"
+    assert claude_1120.skip_reason == "organization disabled"
+    assert claude_1120.prompt_id == "weekly_watch_v1"
+    assert claude_1120.transcript_fidelity == "not_collected"
+    assert claude_1120.collected_at == "2026-11-20T14:06:12Z"
+    assert claude_1120.extraction.mentions == ()
+    assert claude_1120.text == "No answer was collected."
+
+    gemini_1120 = responses["2026-11-20_gemini.md"]
+    assert gemini_1120.status == "ok"
+    assert gemini_1120.model == "Auto"
+    assert gemini_1120.prompt_id == "weekly_watch_v1"
+    assert gemini_1120.transcript_fidelity == "reformatted"
+    assert gemini_1120.collected_at == "2026-11-20T14:06:43Z"
+    assert gemini_1120.text.startswith(
+        "Because I do not have access to live market feeds or real-time price charts right now, I cannot provide up-to-the-minute token prices or breaking news catalysts for this specific week. However, here is a ranked framework of the top 5 cryptocurrencies to watch during any active market cycle, structured by how capital typically rotates, what ecosystem catalysts matter most, and what structural metrics to monitor."
+    )
+    assert "5. Sui (SUI) or Bittensor (TAO)" in gemini_1120.text
+    assert gemini_1120.text.endswith(
+        "Note: Cryptocurrency markets are highly volatile. Always verify live price action, token unlock schedules, and macroeconomic calendar events (such as FOMC announcements or CPI prints) before making trading or investment decisions."
+    )
+    # Rank 5 is a hedge, "Sui (SUI) or Bittensor (TAO)". The numbered line
+    # assigns that rank to the first recognized coin, so SUI keeps rank 5 and
+    # TAO is stored without a rank. Arbitrum and Optimism are named in the
+    # Layer-2 metrics sentence and are stored without a rank.
+    assert [(mention.rank, mention.symbol) for mention in gemini_1120.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "ETH"),
+        (3, "SOL"),
+        (4, "LINK"),
+        (5, "SUI"),
+        (None, "ARB"),
+        (None, "OP"),
+        (None, "TAO"),
+    ]
+    assert gemini_1120.extraction.unresolved_symbols == ()
+
+    grok_1120 = responses["2026-11-20_grok.md"]
+    assert grok_1120.status == "ok"
+    assert grok_1120.model == "Fast"
+    assert grok_1120.prompt_id == "weekly_watch_v1"
+    assert grok_1120.transcript_fidelity == "reformatted"
+    assert grok_1120.collected_at == "2026-11-20T14:07:53Z"
+    assert grok_1120.text.startswith(
+        "Here are 5 cryptocurrencies worth watching this week (as of November 20, 2026), ranked by a mix of market influence, near-term catalysts, relative resilience or volatility potential, and liquidity. The broader market is under pressure—Bitcoin near $61k–$62k with ongoing ETF outflows, extreme fear sentiment, and recent weakness across majors—so these are framed as monitoring candidates rather than buy recommendations."
+    )
+    assert "4. LayerZero (ZRO)" in grok_1120.text
+    assert grok_1120.text.endswith("82 sources")
+    # LayerZero (ZRO) is rank 4 in the answer. It is not in the coin registry,
+    # so the mention table keeps the four recognized ranks and leaves rank 4
+    # empty. Injective (INJ) is named in passing and is stored without a rank.
+    assert [(mention.rank, mention.symbol) for mention in grok_1120.extraction.mentions] == [
+        (1, "BTC"),
+        (2, "SOL"),
+        (3, "HYPE"),
+        (5, "XLM"),
+        (None, "INJ"),
+    ]
+    assert grok_1120.extraction.unresolved_symbols == ()
 
 
 def test_process_rebuilds_tables_from_raw(tmp_path: Path):
